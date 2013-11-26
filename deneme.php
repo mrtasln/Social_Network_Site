@@ -18,10 +18,10 @@
     </div>
      
     <div id="menu">
-      <a href="#">AnaSayfa</a>
-      <a href="#">Hakkinda</a>
-      <a href="#">Kayit Ol</a>
-      <a href="#">Giris Yap</a>
+      <a href="index1.php">AnaSayfa</a>
+      <a href="hakkimizda.php">Hakkinda</a>
+      <a href="KayitOl2.php">Kayit Ol</a>
+      <a href="GirisSayfasi.php">Giris Yap</a>
     </div>
 </div>
 </div>
@@ -29,5 +29,61 @@
 <br />
 <br />
 <br />
+<table width="100%" class="homepageTable">
+        <tr>
+             <td width="55%" valign="top">
+             <h2>Hemen Bize Katılın    </h2>
+             <img src="img/indir.jpg" width="500" /></td>
+             <td width="45%" align="left" valign="top"><h2> Formu doldurarak hemen kayit olun</h2>
+           <form action="#" method="post">
+             <p>&nbsp;</p>
+</form>
+           <form action="<?php echo $editFormAction; ?>" method="post" name="form1" id="form1">
+             <p>&nbsp;</p>
+             <p>&nbsp;</p>
+             <table align="center">
+               <tr valign="baseline">
+                 <td nowrap="nowrap" align="right">Isim:</td>
+                 <td><input type="text" name="fname" value="" size="32" /></td>
+               </tr>
+               <tr valign="baseline">
+                 <td nowrap="nowrap" align="right">Soyisim:</td>
+                 <td><input type="text" name="lname" value="" size="32" /></td>
+               </tr>
+               <tr valign="baseline">
+                 <td nowrap="nowrap" align="right">Kullanıcı Adı:</td>
+                 <td><input type="text" name="username" value="" size="32" /></td>
+               </tr>
+               <tr valign="baseline">
+                 <td nowrap="nowrap" align="right">Email1:</td>
+                 <td><input type="text" name="email" value="" size="32" /></td>
+               </tr>
+               <tr valign="baseline">
+                 <td nowrap="nowrap" align="right">Email2:</td>
+                 <td><input type="text" name="email2" value="" size="32" /></td>
+               </tr>
+               <tr valign="baseline">
+                 <td nowrap="nowrap" align="right">Sifre1:</td>
+                 <td><input type="text" name="password" value="" size="32" /></td>
+               </tr>
+               <tr valign="baseline">
+                 <td nowrap="nowrap" align="right">Sifre2:</td>
+                 <td><input type="text" name="password2" value="" size="32" /></td>
+               </tr>
+               <tr valign="baseline">
+                 <td nowrap="nowrap" align="right">&nbsp;</td>
+                 <td><input type="submit" name="submit" value="Kayıt Ol" /></td>
+               </tr>
+             </table>
+               <input type="hidden" name="MM_insert" value="form1" />
+             </p>
+           </form>
+          <p>&nbsp;</p></td>
+        </tr>
+        <tr>
+          <td valign="top">&nbsp;</td>
+          <td valign="top">&nbsp;</td>
+        </tr>
+</table>
 </body>
-</html>
+</html> 
