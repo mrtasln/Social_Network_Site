@@ -67,6 +67,45 @@ position:fixed;
 	box-shadow: 0 1px 0 rgba(255,255,255,0.1),0 1px 0 rgba(0,0,0,0.9) inset;
 	text-shadow:0 2px 3px rgba(0,0,0,0.1);
 }
+@media screen and (max-width:1280px){
+#menu{
+	background-image:url(../img/menu.png);
+	position:absolute; top:0px; right:0px;
+	height:37px;
+	padding-top:19px;
+	margin-right:4%;
+}
+}
+
+@media screen and (min-width:1280px){
+#menu{
+	background-image:url(../img/menu.png);
+	position:absolute; top:0px; right:0px;
+	height:37px;
+	padding-top:19px;
+	margin-right:6%;
+}
+}
+
+@media screen and (min-width:1400px){
+#menu{
+	background-image:url(../img/menu.png);
+	position:absolute; top:0px; right:0px;
+	height:37px;
+	padding-top:19px;
+	margin-right:10%;
+}
+}
+
+@media screen and (min-width:1920px){
+#menu{
+	background-image:url(../img/menu.png);
+	position:absolute; top:0px; right:0px;
+	height:37px;
+	padding-top:19px;
+	margin-right:25%;
+}
+}
 #menu a{
 	color:#FFFFFF;
 	text-decoration:none;
