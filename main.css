@@ -15,6 +15,7 @@ padding-right:auto;
 width:100%;	
 position:fixed;
 	}
+	
 #wrapper{
 	margin-left:auto;
 	margin-right:auto;
@@ -23,7 +24,8 @@ position:fixed;
 	padding-bottom:0px;
 	background-image:url(../img/menu.png);
 	}
-	.logo{
+	
+.logo{
 	width:38px;
 	}
 	
@@ -67,6 +69,7 @@ position:fixed;
 	box-shadow: 0 1px 0 rgba(255,255,255,0.1),0 1px 0 rgba(0,0,0,0.9) inset;
 	text-shadow:0 2px 3px rgba(0,0,0,0.1);
 }
+
 @media screen and (max-width:1280px){
 #menu{
 	background-image:url(../img/menu.png);
@@ -117,6 +120,18 @@ position:fixed;
 	padding-left:10px;
 	padding-right:10px;
 }
+
+#menu a:hover{
+	color:#FFFFFF;
+	text-decoration:none;
+	font-size:14px;
+	background-image:url(../img/menu.png);
+	background-repeat:no-repeat;
+	padding-top:18px;
+	padding-bottom:22px;
+	padding-left:10px;
+	padding-right:10px;
+}
 h2 {
 	font-family: Arial;
 	font-size: 18px;
@@ -160,4 +175,65 @@ input[type="submit"] {
 	margin-bottom: 3px;
 	margin-top: 3px;
 	border-radius: 7px;
+}
+.homepageTable {
+	padding: 10px;
+	font-size: 14px;
+}
+table tr td #user {
+	width: 90%;
+	height: 20px;
+}
+table tr td #password {
+	height: 20px;
+	width: 90%;
+}
+tr td #form1 table tr td #user2 {
+	height: 20px;
+	width: 100%;
+}
+
+table tr td {
+	height: 25px;
+}
+table tr td #button {
+	height: 100%;
+	width: 98%;
+}
+#form1 {
+	height: 100%;
+	width: 100%;
+	vertical-align: middle;
+}
+table {
+	vertical-align: middle;
+	text-align: center;
+	padding: 0px;
+}
+tr td #form1 #tt {
+	padding: 1px;
+	border-style: solid;
+}
+.homepageTable tr td form h1 {
+	font-size: 20px;
+}
+.homepageTable tr td form h1 a {
+	font-size: 20px;
+}
+tr td form #x {
+	font-size: 24px;
+	text-align: center;
+	vertical-align: middle;
+}
+#x a {
+	font-size: 24px;
+}
+
+#x {
+	font-size: 24px;
+	text-align: center;
+}
+tr td form #recordset {
+	text-align: center;
+	vertical-align: middle;
 }
