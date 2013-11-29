@@ -237,3 +237,36 @@ tr td form #recordset {
 	text-align: center;
 	vertical-align: middle;
 }
+.textHeader{
+	background-color:#F3F6F9;
+	width: 190px;
+	height: 15px;
+	padding: 5px;
+	border-bottom: 1px solid #DCE5EE;
+	font-weight:600;
+}
+.profileLeftSideContent{
+	width: 194px;
+	padding-right: 0px;
+	padding-bottom: 5px;
+	padding-top: 5px;
+	padding-left: 0px;
+	height: 200px;
+	text-align:justify;
+}
+.postForm{
+	float: right;
+	width: 85%;
+	height: 80px;
+	background-color:#DBDBDB;
+	padding: 5px;
+}
+.profilePosts{
+	float: right;
+	width: 85%;
+	height: 414px;
+	background-color: #DCE5EE;
+	padding: 5px;
+}
+
+
