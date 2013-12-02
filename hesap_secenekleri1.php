@@ -105,6 +105,61 @@ $n_em=strip_tags(@$_POST['new_psw']);
 $n_em2=strip_tags(@$_POST['new_psw_re']);
 $pswd=strip_tags(@$_POST['old_psw']);
 
+if($submit) 
+{
+if($n_em==$n_em2)
+{
+	$u_check=mysql_query("SELECT u.sifre1 FROM uyeler u,giris g WHERE g.kullanici_adi=u.kullanici_adi AND g.sifre=u.sifre1 AND u.sifre1='$pswd'");
+		$check=mysql_num_rows($u_check);
+		
+		if($check!=0)
+		{
+	if($n_em&&$n_em2&&$pswd)
+	{
+		             if ((isset($_POST["MM_update"])) && ($_POST["MM_update"] == "form2")) 
+					 {
+                                 $updateSQL = sprintf("UPDATE uyeler SET sifre1=%s WHERE kullanici_adi=%s",
+                                 GetSQLValueString($_POST['new_psw'], "text"),
+                                 GetSQLValueString($_POST['kullaniciAdi'], "text"));
+                                 
+                                 mysql_select_db($database_varitabanibaglantim, $varitabanibaglantim);
+                                 $Result1 = mysql_query($updateSQL, $varitabanibaglantim) or die(mysql_error());
+								 
+								 $updateSQL = sprintf("UPDATE giris SET sifre=%s WHERE kullanici_adi=%s",
+                                 GetSQLValueString($_POST['new_psw'], "text"),
+                                 GetSQLValueString($_POST['kullaniciAdi'], "text"));
+                                 
+                                 mysql_select_db($database_varitabanibaglantim, $varitabanibaglantim);
+                                 $Result1 = mysql_query($updateSQL, $varitabanibaglantim) or die(mysql_error());
+
+                                 $updateGoTo = "index.php";
+                                 if (isset($_SERVER['QUERY_STRING'])) 
+								 {
+                                          $updateGoTo .= (strpos($updateGoTo, '?')) ? "&" : "?";
+                                          $updateGoTo .= $_SERVER['QUERY_STRING'];
+                                 }
+                                 header(sprintf("Location: %s", $updateGoTo));
+					 }
+					 
+	     }
+		 else
+		 {
+			echo "Tum Alanlari Doldurunuz"; 
+		 }
+      }
+	  else
+	  {
+		  echo "Kullanici Adiyla Sifre uyusmuyor.Tekrar giriniz "; 
+		  
+	  }
+}
+else
+{
+	echo "Yeni sifrenin tekrarini yazarken hata oldu";
+	
+}
+}
+
 mysql_select_db($database_varitabanibaglantim, $varitabanibaglantim);
 $query_Recordset1 = "SELECT * FROM uyeler";
 $Recordset1 = mysql_query($query_Recordset1, $varitabanibaglantim) or die(mysql_error());
