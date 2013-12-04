@@ -55,7 +55,6 @@ if(isset($_GET['u']))
 	}
 	
 ?>
-
 <div id="status"></div>
 <div class="postForm">
 <form action="profile.php?u=<?php  echo $_SESSION['MM_Username'] ?>" method="post">
@@ -78,9 +77,40 @@ while($row = mysql_fetch_assoc($getposts)) {
 }
 	*/									    
 ?>
+<?php
+$errorMsg = "";
+if(isset($_POST['addfriend'])) 
+{
+	$friend_request = $_POST['addfriend'];
+	
+	$user_to = $kullanici;
+	$user_from = $kullanici_adi;
+	
+	if($user_to == $kullanici_adi) 
+	{
+		$errorMsg="Sen Kendine Arkadaslik Istegi Gonderemezsin<br />";
+	}
+	else
+	{
+	     $create_request = mysql_query("INSERT INTO friend_requests VALUES ('','$user_to','$user_from')");	
+		 $errorMsg = "Senin Arkadaslik Istegin Gonderildi<br />";
+	}
+}
+else
+{
+	
+}
+?>
 </div>
 <img src="<?php echo $profil_pic; ?>" height="250" width="200" alt="<?php echo $kullanici_adi; ?>'in Profili" title="<?php echo $kullanici_adi; ?>'in Profili" />
 <br />
+<form action="profile.php?u=<?php  echo $kullanici_adi; ?>" method="post">
+<?php
+echo $errorMsg;
+?>
+<input type="submit" name="addfriend" value="Arkadas Ekle" />
+<input type="submit" name="sendmsg" value="Mesaj Gonder" />
+</form>
 <div class="textHeader"><?php echo $kullanici_adi; ?>'in Profili</div>
 <div class="profileLeftSideContent">
 <?php
@@ -102,3 +132,4 @@ echo $about_the_user;
 <img src="#" height="50" width="40"/>&nbsp;&nbsp;
 <img src="#" height="50" width="40"/>&nbsp;&nbsp;
 </div>
+
