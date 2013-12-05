@@ -2,22 +2,18 @@
 <?php require_once('Connections/varitabanibaglantim.php'); ?>
 
 <?php
-if(isset($_SESSION['MM_Username']))
-{
+if(isset($_SESSION['MM_Username'])){
 	$kullanici = $_SESSION['MM_Username'];
 }
-else 
-{
+else {
 	$kullanici="";
 }
 
-if(isset($_GET['u']))
-{
+if(isset($_GET['u'])){
 	$kullanici_adi=mysql_real_escape_string($_GET['u']);
 	if(ctype_alnum($kullanici_adi)){
 	$check=mysql_query("SELECT kullanici_adi,isim FROM uyeler WHERE kullanici_adi='$kullanici_adi'");
-	if(mysql_num_rows($check)==1)
-	{
+	if(mysql_num_rows($check)==1){
 		$get=mysql_fetch_assoc($check);
 		$kullanici_adi=$get['kullanici_adi'];
 		$isim=$get['isim'];
@@ -31,8 +27,7 @@ if(isset($_GET['u']))
 }
 
 /*$post = @$_POST['post'];
-	if($post != "") 
-	{
+	if($post != "") {
 		$date_added = date("Y-m-d");
 		$added_by= $kullanici_adi;
 		$user_posted_to = "test123";
@@ -45,8 +40,7 @@ if(isset($_GET['u']))
 	$check_pic=mysql_query("SELECT profil_resmi FROM uyeler WHERE kullanici_adi='$kullanici_adi'");
 	$get_pic_row=mysql_fetch_assoc($check_pic);
 	$profile_pic_db=$get_pic_row['profil_resmi'];
-	if($profile_pic_db == "")
-	{
+	if($profile_pic_db == ""){
 		$profil_pic="img/images1.jpg";
 	}
 	else
@@ -79,15 +73,13 @@ while($row = mysql_fetch_assoc($getposts)) {
 ?>
 <?php
 $errorMsg = "";
-if(isset($_POST['addfriend'])) 
-{
+if(isset($_POST['addfriend'])) {
 	$friend_request = $_POST['addfriend'];
 	
 	$user_to = $kullanici;
 	$user_from = $kullanici_adi;
 	
-	if($user_to == $kullanici_adi) 
-	{
+	if($user_to == $kullanici_adi) {
 		$errorMsg="Sen Kendine Arkadaslik Istegi Gonderemezsin<br />";
 	}
 	else
@@ -106,13 +98,37 @@ else
 <br />
 <form action="profile.php?u=<?php  echo $kullanici_adi; ?>" method="post">
 <?php
+$friendArray = "";
+$countFriends = "";
+$friendsArray12 = "";
+$addAsFriend = "";
+$selectFriendsQuery = mysql_query("SELECT arkadas_dizisi FROM uyeler WHERE kulanici_adi='$kullanici_adi'");
+$friendRow = mysql_fetch_assoc($selectFriendsQuery);
+$friendArray = $friendRow['arkadas_dizisi'];
+if($friendArray != "") {
+	$friendArray = explode(",",$friendArray);
+	$countFriends = count($friendArray);
+	$friendsArray12 = array_slice($friendArray, 0, 12);
+}
+$i = 0;
+if(in_array($kullanici,$friendArray)) {
+	$addAsFriend = '<input type="submit" name="removefriend" value="Arkadas Cıkar">';
+}
+else
+{
+	$addAsFriend = '<input type="submit" name="addfriend" value="Arkadas Ekle">';
+}
+echo $addAsFriend;
+	
+?>
+<?php
 echo $errorMsg;
 ?>
-<input type="submit" name="addfriend" value="Arkadas Ekle" />
 <input type="submit" name="sendmsg" value="Mesaj Gonder" />
 </form>
 <div class="textHeader"><?php echo $kullanici_adi; ?>'in Profili</div>
 <div class="profileLeftSideContent">
+
 <?php
 $about_query=mysql_query("SELECT biyografi FROM uyeler WHERE kullanici_adi='$kullanici_adi'");
 $get_result=mysql_fetch_assoc($about_query);
