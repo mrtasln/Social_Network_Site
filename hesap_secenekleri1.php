@@ -199,12 +199,14 @@ $totalRows_Recordset1 = mysql_num_rows($Recordset1);
   <br />
   <br />
 </p>
-<form id="form2" name="form2" method="post" action="<?php echo $editFormAction; ?>">
-  
-  <p>&nbsp;</p>
-  <p>SIFRENI DEGISTIR</p>
+<table width="100%" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="55%">
+    <p>&nbsp;</p>
+  <p>SIFRENI DEGISTIRME</p>
 <p>&nbsp;</p>
   <p>
+  <form id="form2" name="form2" method="post" action="<?php echo $editFormAction; ?>">
     <label for="kullaniciAdi"></label>
     <input type="text" name="kullaniciAdi" id="kullaniciAdi" value="<?php  echo $_SESSION['MM_Username'] ?>" />
   </p>
@@ -222,10 +224,47 @@ $totalRows_Recordset1 = mysql_num_rows($Recordset1);
 <p>
         <input type="submit" name="degistir" id="degistir" value="Guncelle" />
   </p>
-  <p>
-    <input type="hidden" name="MM_update" value="form2" />
-  </p>
+  <input type="hidden" name="MM_update" value="form2" />
+  </form>
+  <p></td>
+    <td width="45%">
+    <p>&nbsp;</p>
+    <p id="bilgiler"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+    <p>HESAP BİLGİLERİNİ DEGİSTİRME</p>
+    <p>&nbsp;</p>
+    <p>
+    <form id="form3" name="form3" method="post" action="<?php echo $editFormAction1; ?>">
+    <p>
+        <label for="kullaniciadi"></label>
+    <input type="text" name="kullaniciadi" id="kullaniciadi" value="<?php  echo $_SESSION['MM_Username'] ?>" />
+        </p>
+      <p>
+        <label for="isim"></label>
+        <input type="text" name="isim" id="isim" placeholder="İsim" value="<?php echo htmlentities($row_Recordset1['isim'], ENT_COMPAT, 'utf-8'); ?>" size="32" />
+      </p>
+      <p>
+        <label for="soyisim"></label>
+      <input type="text" name="soyisim" id="soyisim" placeholder="Soyisim" value="<?php echo htmlentities($row_Recordset1['soyisim'], ENT_COMPAT, 'utf-8'); ?>" size="32" />
+</p>
+
+    <p>
+    <input type="text" name="email" id="email" placeholder="Email" value="<?php echo htmlentities($row_Recordset1['email1'], ENT_COMPAT, 'utf-8'); ?>" size="32" />
+    </p>
+    <p>
+    </p>
+    <p>
+      <textarea name="biyografi" id="biyografi" rows="7" cols="60" placeholder="Senin Hakkında Bilgerini Gir"></textarea>
+    </p>
+    <p>
+      <input type="submit" name="degistir3" id="degistir3" value="Guncelle" />
+    </p>
+    <input type="hidden" name="MM_update1" value="form3" />
+<p>&nbsp;</p>
 </form>
+    </td>
+  </tr>
+
+</table>
 <p>&nbsp; </p>
 </body>
 </html>
