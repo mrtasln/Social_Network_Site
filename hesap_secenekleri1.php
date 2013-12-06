@@ -166,6 +166,42 @@ $Recordset1 = mysql_query($query_Recordset1, $varitabanibaglantim) or die(mysql_
 $row_Recordset1 = mysql_fetch_assoc($Recordset1);
 $totalRows_Recordset1 = mysql_num_rows($Recordset1);
 ?>
+<?php
+if (!function_exists("GetSQLValueString")) {
+function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
+{
+  if (PHP_VERSION < 6) {
+    $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
+  }
+
+  $theValue = function_exists("mysql_real_escape_string") ? mysql_real_escape_string($theValue) : mysql_escape_string($theValue);
+
+  switch ($theType) {
+    case "text":
+      $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
+      break;    
+    case "long":
+    case "int":
+      $theValue = ($theValue != "") ? intval($theValue) : "NULL";
+      break;
+    case "double":
+      $theValue = ($theValue != "") ? doubleval($theValue) : "NULL";
+      break;
+    case "date":
+      $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
+      break;
+    case "defined":
+      $theValue = ($theValue != "") ? $theDefinedValue : $theNotDefinedValue;
+      break;
+  }
+  return $theValue;
+}
+}
+$editFormAction1 = $_SERVER['PHP_SELF'];
+if (isset($_SERVER['QUERY_STRING'])) {
+  $editFormAction1 .= "?" . htmlentities($_SERVER['QUERY_STRING']);
+}
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -186,19 +222,29 @@ $totalRows_Recordset1 = mysql_num_rows($Recordset1);
     </div>
      
     <div id="menu">
-      <a href="index.php">Anasayfa</a>
-      <a href="#"><?php  echo $_SESSION['MM_Username'] ?>'in Profili</a>
+      <a href="index.php">AnaSayfa</a>
+      <a href="profile.php?u=<?php  echo $_SESSION['MM_Username'] ?>"><?php  echo $_SESSION['MM_Username'] ?>'in Profili</a>
       <a href="hesap_secenekleri1.php">Hesap Secenekleri</a>
-      <a href="#">Cikis Yap</a>
-  
+      <a href="<?php echo $logoutAction ?>">Cikis Yap</a>
     </div>
 </div>
 </div>
 <p><br />
   <br />
-  <br />
-  <br />
 </p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><br />
+</p>
+<form action="<?php echo $editFormAction2; ?>" name="form4" id="form4" method="post" enctype="multipart/form-data" >
+  <h1><strong>Profil Resmini Sec </strong></h1>
+  <p><img src="<?php echo $profil_pic; ?>" width="70" />
+  <input type="hidden"  name="kullaniciAdi" id="kullaniciAdi" value="<?php  echo $_SESSION['MM_Username'] ?>" />
+  <input type="file" name="profilepic" id="profilpic" /><br />
+  <input type="submit" name="degistir4" id="degistir4" value="Resmi Guncelle">
+  <input type="hidden" name="MM_update2" value="form4" />
+</p>
+</form>
 <table width="100%" cellspacing="0" cellpadding="0">
   <tr>
     <td width="55%">
@@ -265,6 +311,9 @@ $totalRows_Recordset1 = mysql_num_rows($Recordset1);
   </tr>
 
 </table>
-<p>&nbsp; </p>
+
 </body>
 </html>
+<?php
+mysql_free_result($Recordset1);
+?>
