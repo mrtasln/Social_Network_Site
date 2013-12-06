@@ -201,6 +201,69 @@ $editFormAction1 = $_SERVER['PHP_SELF'];
 if (isset($_SERVER['QUERY_STRING'])) {
   $editFormAction1 .= "?" . htmlentities($_SERVER['QUERY_STRING']);
 }
+
+
+$degistir=@$_POST['degistir3'];
+$ad=strip_tags(@$_POST['isim']);
+$soyad=strip_tags(@$_POST['soyisim']);
+$em=strip_tags(@$_POST['email']);
+$bio=strip_tags(@$_POST['biyografi']);
+$kul_ad=strip_tags(@$_POST['kullaniciadi']);
+
+
+if($degistir) 
+{
+	
+
+	if($ad&&$soyad&&$bio&&$em)
+	{
+		             if ((isset($_POST["MM_update1"])) && ($_POST["MM_update1"] == "form3")) 
+					 {
+                                 $update1SQL = sprintf("UPDATE uyeler SET isim=%s,soyisim=%s,email1=%s,biyografi=%s WHERE kullanici_adi=%s",
+                                 GetSQLValueString($_POST['isim'], "text"),
+								 GetSQLValueString($_POST['soyisim'], "text"),
+								 GetSQLValueString($_POST['email'], "text"),
+								 GetSQLValueString($_POST['biyografi'], "text"),
+                                 GetSQLValueString($_POST['kullaniciadi'], "text"));
+                                 
+                                 mysql_select_db($database_varitabanibaglantim, $varitabanibaglantim);
+                                 $Result1 = mysql_query($update1SQL, $varitabanibaglantim) or die(mysql_error());
+								 
+                                 header("Location: profile.php?u=$kul_ad");
+								 
+					 }
+					 
+	     }
+		 else
+		 {
+			echo "Tum Alanlari Doldurunuz"; 
+		 }
+
+}
+mysql_select_db($database_varitabanibaglantim, $varitabanibaglantim);
+$query_Recordset1 = "SELECT * FROM uyeler";
+$Recordset1 = mysql_query($query_Recordset1, $varitabanibaglantim) or die(mysql_error());
+$row_Recordset1 = mysql_fetch_assoc($Recordset1);
+$totalRows_Recordset1 = mysql_num_rows($Recordset1);
+
+
+?>
+<?php 
+$degistir1=@$_POST['degistir4'];
+$profil=strip_tags(@$_POST['profilpic']);
+$kullanici=strip_tags(@$_POST['kullaniciAdi']);
+
+
+$check_pic=mysql_query("SELECT profil_resmi FROM uyeler WHERE kullanici_adi='$kullanici'");
+	$get_pic_row=mysql_fetch_assoc($check_pic);
+	$profile_pic_db=$get_pic_row['profil_resmi'];
+	if($profile_pic_db == ""){
+		$profil_pic="img/images1.jpg";
+	}
+	else
+	{
+	$profil_pic="userdata/profile_pics/".$profile_pic_db;	
+	}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
