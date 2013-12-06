@@ -249,6 +249,42 @@ $totalRows_Recordset1 = mysql_num_rows($Recordset1);
 
 ?>
 <?php 
+if (!function_exists("GetSQLValueString")) {
+function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
+{
+  if (PHP_VERSION < 6) {
+    $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
+  }
+
+  $theValue = function_exists("mysql_real_escape_string") ? mysql_real_escape_string($theValue) : mysql_escape_string($theValue);
+
+  switch ($theType) {
+    case "text":
+      $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
+      break;    
+    case "long":
+    case "int":
+      $theValue = ($theValue != "") ? intval($theValue) : "NULL";
+      break;
+    case "double":
+      $theValue = ($theValue != "") ? doubleval($theValue) : "NULL";
+      break;
+    case "date":
+      $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
+      break;
+    case "defined":
+      $theValue = ($theValue != "") ? $theDefinedValue : $theNotDefinedValue;
+      break;
+  }
+  return $theValue;
+}
+}
+
+$editFormAction2 = $_SERVER['PHP_SELF'];
+if (isset($_SERVER['QUERY_STRING'])) {
+  $editFormAction2 .= "?" . htmlentities($_SERVER['QUERY_STRING']);
+}
+
 $degistir1=@$_POST['degistir4'];
 $profil=strip_tags(@$_POST['profilpic']);
 $kullanici=strip_tags(@$_POST['kullaniciAdi']);
@@ -264,6 +300,30 @@ $check_pic=mysql_query("SELECT profil_resmi FROM uyeler WHERE kullanici_adi='$ku
 	{
 	$profil_pic="userdata/profile_pics/".$profile_pic_db;	
 	}
+	
+	/*if(isset($_FILES['profilepic'])) {
+	if(((@$_FILES["profilepic"]["type"]=="image/jpeg") || (@$_FILES["profilepic"]["type"]=="image/png") || (@$_FILES["profilepic"]["type"]=="image/gif"))&&($_FILES["profilepic"]["size"] < 1048576))
+{
+	$chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	$rand_dir_name = substr(str_shuffle($chars), 0, 15);
+	mkdir("userdata/profile_pics/$rand_dir_name");
+	if(file_exists("userdata/profile_pics/$rand_dir_name/".@$_FILES["profilepic"]["name"]))
+	{
+	echo @$_FILES["profilepic"]["name"]." Already exists";
+	}
+	else{
+		move_uploaded_file(@$_FILES["profilepic"]["tmp_name"],"userdata/profile_pics/$rand_dir_name/".$_FILES["profilepic"]["name"]);
+		//echo "Yüklendi ve Suraya depolandi:  userdata/profile_pics/$rand_dir_name/".@$_FILES["profilepic"]["name"];
+		$profile_pic_name = @$_FILES["profilepic"]["name"];
+		$profile_pic_query = mysql_query("UPDATE uyeler SET profil_resmi='$rand_dir_name/$profile_pic_name' WHERE kullanici_adi='$kul_ad'");
+		header("Location: hesap_secenekleri1.php");
+	}
+}
+else{
+
+}
+}*/
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
