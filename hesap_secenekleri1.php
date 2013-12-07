@@ -301,6 +301,56 @@ $check_pic=mysql_query("SELECT profil_resmi FROM uyeler WHERE kullanici_adi='$ku
 	$profil_pic="userdata/profile_pics/".$profile_pic_db;	
 	}
 	
+	if($degistir1) 
+{
+
+	if ((isset($_POST["MM_update2"])) && ($_POST["MM_update2"] == "form4")) 
+{
+	
+	if(isset($_FILES['profilepic'])) {
+		
+	if(((@$_FILES["profilepic"]["type"]=="image/jpeg") || (@$_FILES["profilepic"]["type"]=="image/png") || (@$_FILES["profilepic"]["type"]=="image/gif"))&&($_FILES["profilepic"]["size"] < 1048576))
+{
+	$chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	$rand_dir_name = substr(str_shuffle($chars), 0, 15);
+	mkdir("userdata/profile_pics/$rand_dir_name");
+	
+	if(file_exists("userdata/profile_pics/$rand_dir_name/".@$_FILES["profilepic"]["name"]))
+	{
+		
+	echo @$_FILES["profilepic"]["name"]." Already exists";
+	}
+	else
+	{
+		move_uploaded_file(@$_FILES["profilepic"]["tmp_name"],"userdata/profile_pics/$rand_dir_name/".$_FILES["profilepic"]["name"]);
+		//echo "Yüklendi ve Suraya depolandi:  userdata/profile_pics/$rand_dir_name/".@$_FILES["profilepic"]["name"];
+		$profile_pic_name = @$_FILES["profilepic"]["name"];
+		
+		
+		$update1SQL = sprintf("UPDATE uyeler SET profil_resmi='$rand_dir_name/$profile_pic_name' WHERE kullanici_adi=%s",
+                                 GetSQLValueString($_POST['kullaniciAdi'], "text"));
+		
+		//$profile_pic_query = mysql_query("UPDATE uyeler SET profil_resmi='$rand_dir_name/$profile_pic_name' WHERE kullanici_adi='$kullanici'");
+		mysql_select_db($database_varitabanibaglantim, $varitabanibaglantim);
+                             $Result1 = mysql_query($update1SQL, $varitabanibaglantim) or die(mysql_error());
+		
+		header("Location: hesap_secenekleri1.php");
+	}
+}
+else
+{
+   echo "Gecersiz Dosya!Yukliyecegin resim 1MB dan fazla olamaz ve Resim .jpg , .jpeg , .png veya .gif uzantili olmalidir";	
+}
+}
+		            
+}
+}
+mysql_select_db($database_varitabanibaglantim, $varitabanibaglantim);
+$query_Recordset1 = "SELECT * FROM uyeler";
+$Recordset1 = mysql_query($query_Recordset1, $varitabanibaglantim) or die(mysql_error());
+$row_Recordset1 = mysql_fetch_assoc($Recordset1);
+$totalRows_Recordset1 = mysql_num_rows($Recordset1);
+	
 	/*if(isset($_FILES['profilepic'])) {
 	if(((@$_FILES["profilepic"]["type"]=="image/jpeg") || (@$_FILES["profilepic"]["type"]=="image/png") || (@$_FILES["profilepic"]["type"]=="image/gif"))&&($_FILES["profilepic"]["size"] < 1048576))
 {
