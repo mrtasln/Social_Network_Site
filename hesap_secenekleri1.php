@@ -34,15 +34,22 @@ if (!isset($_SESSION)) {
 $MM_authorizedUsers = "";
 $MM_donotCheckaccess = "true";
 
+// *** Restrict Access To Page: Grant or deny access to this page
 function isAuthorized($strUsers, $strGroups, $UserName, $UserGroup) { 
+  // For security, start by assuming the visitor is NOT authorized. 
   $isValid = False; 
 
+  // When a visitor has logged into this site, the Session variable MM_Username set equal to their username. 
+  // Therefore, we know that a user is NOT logged in if that Session variable is blank. 
   if (!empty($UserName)) { 
+    // Besides being logged in, you may restrict access to only certain users based on an ID established when they login. 
+    // Parse the strings into arrays. 
     $arrUsers = Explode(",", $strUsers); 
     $arrGroups = Explode(",", $strGroups); 
     if (in_array($UserName, $arrUsers)) { 
       $isValid = true; 
     } 
+    // Or, you may restrict access to only certain users based on their username. 
     if (in_array($UserGroup, $arrGroups)) { 
       $isValid = true; 
     } 
@@ -51,7 +58,9 @@ function isAuthorized($strUsers, $strGroups, $UserName, $UserGroup) {
     } 
   } 
   return $isValid; 
-  $MM_restrictGoTo = "hata.php";
+}
+
+$MM_restrictGoTo = "hata.php";
 if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers, $_SESSION['MM_Username'], $_SESSION['MM_UserGroup'])))) {   
   $MM_qsChar = "?";
   $MM_referrer = $_SERVER['PHP_SELF'];
@@ -62,9 +71,9 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
   header("Location: ". $MM_restrictGoTo); 
   exit;
 }
-}
 ?>
 <?php
+
 if (!function_exists("GetSQLValueString")) {
 function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
 {
@@ -99,6 +108,7 @@ $editFormAction = $_SERVER['PHP_SELF'];
 if (isset($_SERVER['QUERY_STRING'])) {
   $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
 }
+
 $submit=@$_POST['degistir'];
 $adi=strip_tags(@$_POST['kullaniciAdi']);
 $n_em=strip_tags(@$_POST['new_psw']);
@@ -111,7 +121,6 @@ if($n_em==$n_em2)
 {
 	$u_check=mysql_query("SELECT u.sifre1 FROM uyeler u,giris g WHERE g.kullanici_adi=u.kullanici_adi AND g.sifre=u.sifre1 AND u.sifre1='$pswd'");
 		$check=mysql_num_rows($u_check);
-		
 		if($check!=0)
 		{
 	if($n_em&&$n_em2&&$pswd)
@@ -165,6 +174,7 @@ $query_Recordset1 = "SELECT * FROM uyeler";
 $Recordset1 = mysql_query($query_Recordset1, $varitabanibaglantim) or die(mysql_error());
 $row_Recordset1 = mysql_fetch_assoc($Recordset1);
 $totalRows_Recordset1 = mysql_num_rows($Recordset1);
+
 ?>
 <?php
 if (!function_exists("GetSQLValueString")) {
@@ -201,7 +211,6 @@ $editFormAction1 = $_SERVER['PHP_SELF'];
 if (isset($_SERVER['QUERY_STRING'])) {
   $editFormAction1 .= "?" . htmlentities($_SERVER['QUERY_STRING']);
 }
-
 
 $degistir=@$_POST['degistir3'];
 $ad=strip_tags(@$_POST['isim']);
@@ -248,7 +257,7 @@ $totalRows_Recordset1 = mysql_num_rows($Recordset1);
 
 
 ?>
-<?php 
+<?php
 if (!function_exists("GetSQLValueString")) {
 function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
 {
@@ -301,9 +310,9 @@ $check_pic=mysql_query("SELECT profil_resmi FROM uyeler WHERE kullanici_adi='$ku
 	$profil_pic="userdata/profile_pics/".$profile_pic_db;	
 	}
 	
-	if($degistir1) 
-{
 
+if($degistir1) 
+{
 	if ((isset($_POST["MM_update2"])) && ($_POST["MM_update2"] == "form4")) 
 {
 	
@@ -341,8 +350,7 @@ else
 {
    echo "Gecersiz Dosya!Yukliyecegin resim 1MB dan fazla olamaz ve Resim .jpg , .jpeg , .png veya .gif uzantili olmalidir";	
 }
-}
-		            
+}		            
 }
 }
 mysql_select_db($database_varitabanibaglantim, $varitabanibaglantim);
@@ -350,27 +358,34 @@ $query_Recordset1 = "SELECT * FROM uyeler";
 $Recordset1 = mysql_query($query_Recordset1, $varitabanibaglantim) or die(mysql_error());
 $row_Recordset1 = mysql_fetch_assoc($Recordset1);
 $totalRows_Recordset1 = mysql_num_rows($Recordset1);
-	
-	/*if(isset($_FILES['profilepic'])) {
+
+/*if(isset($_FILES['profilepic'])) {
 	if(((@$_FILES["profilepic"]["type"]=="image/jpeg") || (@$_FILES["profilepic"]["type"]=="image/png") || (@$_FILES["profilepic"]["type"]=="image/gif"))&&($_FILES["profilepic"]["size"] < 1048576))
 {
 	$chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 	$rand_dir_name = substr(str_shuffle($chars), 0, 15);
 	mkdir("userdata/profile_pics/$rand_dir_name");
+	
 	if(file_exists("userdata/profile_pics/$rand_dir_name/".@$_FILES["profilepic"]["name"]))
 	{
 	echo @$_FILES["profilepic"]["name"]." Already exists";
 	}
-	else{
+	else
+	{
 		move_uploaded_file(@$_FILES["profilepic"]["tmp_name"],"userdata/profile_pics/$rand_dir_name/".$_FILES["profilepic"]["name"]);
 		//echo "Yüklendi ve Suraya depolandi:  userdata/profile_pics/$rand_dir_name/".@$_FILES["profilepic"]["name"];
 		$profile_pic_name = @$_FILES["profilepic"]["name"];
+		
+		
+		
 		$profile_pic_query = mysql_query("UPDATE uyeler SET profil_resmi='$rand_dir_name/$profile_pic_name' WHERE kullanici_adi='$kul_ad'");
+		
 		header("Location: hesap_secenekleri1.php");
 	}
 }
-else{
-
+else
+{
+	
 }
 }*/
 

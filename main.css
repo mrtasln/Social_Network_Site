@@ -237,6 +237,31 @@ tr td form #recordset {
 	text-align: center;
 	vertical-align: middle;
 }
+#form2 {
+	text-align: center;
+	vertical-align: middle;
+}
+tr td p {
+	font-size: 24px;
+}
+
+
+#form1 #psw tr td p {
+	font-size: 18px;
+}
+#form1 tr td p {
+	font-size: 16px;
+	text-align: center;
+}
+#form2 tr td p {
+	font-size: 36px;
+}
+#form2 p {
+	font-size: 28px;
+}
+#bilgiler {
+	text-align: left;
+}
 .textHeader{
 	background-color:#F3F6F9;
 	width: 190px;
@@ -269,4 +294,17 @@ tr td form #recordset {
 	padding: 5px;
 }
 
-
+#resim {
+	text-align: center;
+	vertical-align: middle;
+	padding: 1px;
+}
+#pro {
+	text-align: center;
+}
+#resim h1 {
+	font-size: 20px;
+}
+#resim p br {
+	font-size: 20px;
+}
