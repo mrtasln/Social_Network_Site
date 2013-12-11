@@ -102,23 +102,79 @@ $friendArray = "";
 $countFriends = "";
 $friendsArray12 = "";
 $addAsFriend = "";
-$selectFriendsQuery = mysql_query("SELECT arkadas_dizisi FROM uyeler WHERE kulanici_adi='$kullanici_adi'");
+$selectFriendsQuery = mysql_query("SELECT arkadas_dizisi FROM uyeler WHERE kullanici_adi='$kullanici_adi'");
 $friendRow = mysql_fetch_assoc($selectFriendsQuery);
 $friendArray = $friendRow['arkadas_dizisi'];
 if($friendArray != "") {
 	$friendArray = explode(",",$friendArray);
 	$countFriends = count($friendArray);
 	$friendsArray12 = array_slice($friendArray, 0, 12);
-}
 $i = 0;
 if(in_array($kullanici,$friendArray)) {
-	$addAsFriend = '<input type="submit" name="removefriend" value="Arkadas Cıkar">';
+	$addAsFriend = '<input type="submit" name="removefriend" value="Arkadas Cikar">';
 }
 else
 {
 	$addAsFriend = '<input type="submit" name="addfriend" value="Arkadas Ekle">';
 }
 echo $addAsFriend;
+}
+else
+{
+	$addAsFriend = '<input type="submit" name="addfriend" value="Arkadas Ekle">';
+	echo $addAsFriend;
+}
+if(@$_POST['removefriend']) {
+	  $add_friend_check = mysql_query("SELECT arkadas_dizisi FROM uyeler WHERE kullanici_adi='$kullanici'");
+	  $get_friend_row = mysql_fetch_assoc($add_friend_check);
+	  $friend_array = $get_friend_row['arkadas_dizisi'];
+	  $friend_array_explode = explode(",",$friend_array);
+	  $friend_array_count = count($friend_array_explode); 
+	  
+	  $add_friend_check_username = mysql_query("SELECT arkadas_dizisi FROM uyeler WHERE kullanici_adi='$kullanici_adi'");
+	  $get_friend_row_username = mysql_fetch_assoc($add_friend_check_username);
+	  $friend_array_username = $get_friend_row_username['arkadas_dizisi'];
+	  $friend_array_explode_username = explode(",",$friend_array_username);
+	  $friend_array_count_username = count($friend_array_explode_username); 
+	  
+	  $usernameComma = ",".$kullanici_adi;
+	  $usernameComma2 = $kullanici_adi.",";
+	  
+	  $userComma = ",".$kullanici;
+	  $userComma2 = $kullanici.",";
+	  
+	  if(strstr($friend_array,$usernameComma)) {
+		  $friend1 = str_replace("$usernameComma","",$friend_array);
+	  }
+	  else
+	  if(strstr($friend_array,$usernameComma2)) {
+		  $friend1 = str_replace("$usernameComma2","",$friend_array);
+	  }
+	  else
+	  if(strstr($friend_array,$kullanici_adi)) {
+		  $friend1 = str_replace("$kullanici_adi","",$friend_array);
+	  }
+	  
+	  if(strstr($friend_array,$userComma)) {
+		  $friend2 = str_replace("$userComma","",$friend_array);
+	  }
+	  else
+	  if(strstr($friend_array,$userComma2)) {
+		  $friend2 = str_replace("$userComma2","",$friend_array);
+	  }
+	  else
+	  if(strstr($friend_array,$kullanici)) {
+		  $friend2 = str_replace("$kullanici","",$friend_array);
+	  }
+	  
+	  $friend2 = "";
+	  
+	  $removeFriendQuery = mysql_query("UPDATE uyeler SET arkadas_dizisi='$friend1' WHERE kullanici_adi='$kullanici'");
+	  $removeFriendQuery_username = mysql_query("UPDATE uyeler SET arkadas_dizisi='$friend2' WHERE kullanici_adi='$kullanici_adi'");
+	  echo "Arkadas Cikarildi...";
+	  header("Location: profile.php?u=$kullanici_adi");
+		
+}
 	
 ?>
 <?php
