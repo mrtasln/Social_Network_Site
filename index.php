@@ -60,6 +60,27 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
 ?>
 <?php require_once('Connections/varitabanibaglantim.php'); ?>
 
+<?php
+if(isset($_SESSION['MM_Username'])){
+	$kullanici = $_SESSION['MM_Username'];
+}
+else {
+	$kullanici="";
+}
+
+$get_unread_query = mysql_query("SELECT opened FROM pvt_messages WHERE user_to='$kullanici' && opened='hayir'");
+$get_uread = mysql_fetch_assoc($get_unread_query);
+$unread_numrows = mysql_num_rows($get_unread_query);
+if($unread_numrows != 0)
+{
+$unread_numrows = "(".$unread_numrows.")";
+}
+else
+{
+$unread_numrows = "";	
+}
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -80,9 +101,10 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
     </div>
      
     <div id="menu">
-      <a href="#">AnaSayfa</a>
-      <a href="profil.php"><?php  echo $_SESSION['MM_Username'] ?>'in Profili</a>
+      <a href="index.php">AnaSayfa</a>
+      <a href="profile.php?u=<?php  echo $_SESSION['MM_Username'] ?>"><?php  echo $_SESSION['MM_Username'] ?>'in Profili</a>
       <a href="hesap_secenekleri1.php">Hesap Secenekleri</a>
+      <a href="mesajlarim.php">Mesajlarım <?php echo $unread_numrows; ?></a>
       <a href="<?php echo $logoutAction ?>">Cikis Yap</a>
     </div>
 </div>

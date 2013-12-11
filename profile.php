@@ -13,7 +13,7 @@ if(isset($_GET['u'])){
 	$kullanici_adi=mysql_real_escape_string($_GET['u']);
 	if(ctype_alnum($kullanici_adi)){
 	$check=mysql_query("SELECT kullanici_adi,isim FROM uyeler WHERE kullanici_adi='$kullanici_adi'");
-	if(mysql_num_rows($check)==1){
+	if(mysql_num_rows($check)===1){
 		$get=mysql_fetch_assoc($check);
 		$kullanici_adi=$get['kullanici_adi'];
 		$isim=$get['isim'];
@@ -70,8 +70,11 @@ while($row = mysql_fetch_assoc($getposts)) {
 										   ";
 }
 	*/									    
-?>
-<?php
+
+if(isset($_POST['sendmsg'])) {
+header("Location: send_msg.php?u=$kullanici_adi");	
+}
+
 $errorMsg = "";
 if(isset($_POST['addfriend'])) {
 	$friend_request = $_POST['addfriend'];
@@ -80,12 +83,12 @@ if(isset($_POST['addfriend'])) {
 	$user_from = $kullanici_adi;
 	
 	if($user_to == $kullanici_adi) {
-		$errorMsg="Sen Kendine Arkadaslik Istegi Gonderemezsin<br />";
+		$errorMsg="<br />Sen Kendine Arkadaslik Istegi Gonderemezsin<br />";
 	}
 	else
 	{
 	     $create_request = mysql_query("INSERT INTO friend_requests VALUES ('','$user_to','$user_from')");	
-		 $errorMsg = "Senin Arkadaslik Istegin Gonderildi<br />";
+		 $errorMsg = "<br />Senin Arkadaslik Istegin Gonderildi<br />";
 	}
 }
 else
@@ -195,13 +198,27 @@ echo $about_the_user;
 </div>
 <div class="textHeader"><?php echo $kullanici_adi; ?>'in Arkadaslari</div>
 <div class="profileLeftSideContent">
-<img src="#" height="50" width="40"/>&nbsp;&nbsp;
-<img src="#" height="50" width="40"/>&nbsp;&nbsp;
-<img src="#" height="50" width="40"/>&nbsp;&nbsp;
-<img src="#" height="50" width="40"/>&nbsp;&nbsp;
-<img src="#" height="50" width="40"/>&nbsp;&nbsp;
-<img src="#" height="50" width="40"/>&nbsp;&nbsp;
-<img src="#" height="50" width="40"/>&nbsp;&nbsp;
-<img src="#" height="50" width="40"/>&nbsp;&nbsp;
+<?php
+if($countFriends != 0){
+	foreach($friendsArray12 as $key => $value) {
+		$i++;
+		$getFriendQuery = mysql_query("SELECT * FROM uyeler WHERE kullanici_adi='$value' LIMIT 1");
+		$getFriendRow = mysql_fetch_assoc($getFriendQuery);
+		$friendUsername = $getFriendRow['kullanici_adi'];
+		$friendProfilePic = $getFriendRow['profil_resmi'];
+		
+		if($friendProfilePic == "") {
+			echo "<a href='profile.php?u=$friendUsername'><img src='img/images.jpg' alt=\"$friendUsername'in Profili\" title=\"$friendUsername'in Profili\" height='50' width='40' style='padding-right: 6px;'></a>";
+		}
+		else
+		{
+			echo "<a href='profile.php?u=$friendUsername'><img src='userdata/profile_pics/$friendProfilePic' alt=\"$friendUsername'in Profili\" title=\"$friendUsername'in Profili\" height='50' width='40' style='padding-right: 6px;'></a>";
+		}
+	}
+	
+}
+else
+echo $kullanici_adi."henuz arkadasa sahip degil";
+?>
 </div>
 
