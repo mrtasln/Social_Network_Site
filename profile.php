@@ -208,7 +208,9 @@ if($countFriends != 0){
 		$friendProfilePic = $getFriendRow['profil_resmi'];
 		
 		if($friendProfilePic == "") {
+			if($friendUsername != "") {
 			echo "<a href='profile.php?u=$friendUsername'><img src='img/images.jpg' alt=\"$friendUsername'in Profili\" title=\"$friendUsername'in Profili\" height='50' width='40' style='padding-right: 6px;'></a>";
+			}
 		}
 		else
 		{

@@ -17,9 +17,20 @@ if(isset($_GET['u'])){
 		
 		if($kullanici_adi != $kullanici) {
 			if(isset($_POST['submit'])) {
+				$msg_title = strip_tags(@$_POST['msg_title']);
 				$msg_body = strip_tags(@$_POST['msg_body']);
 				$date = date("Y-m-d");
-				$opened = "hayir";				
+				$opened = "hayir";	
+				$deleted= "hayir";
+				
+				if($msg_title == "Buraya Mesaji Giriniz ...") {
+					echo "Senin Mesajina Bir Baslik Ekle";
+				}
+				else
+				if(strlen($msg_title) < 3) {
+					echo "Senin Mesajinin Basliginin Uzunlugu 3 karakterden daha az olamaz";
+				}
+				else
 				if($msg_body == "Gondermek Istedigin Mesaji Giriniz") {
 				echo "Lutfen Mesaj Yaziniz";	
 				}
@@ -29,14 +40,15 @@ if(isset($_GET['u'])){
 				}
 				else
 				{
-				$send_msg = mysql_query("INSERT INTO pvt_messages VALUES('','$kullanici','$kullanici_adi','$msg_body','$date','$opened')");
+				$send_msg = mysql_query("INSERT INTO pvt_messages VALUES('','$kullanici','$kullanici_adi','$msg_title','$msg_body','$date','$opened','$deleted')");
 				echo "Senin Mesajin Gonderildi";
 				}
 			}
 		echo "
 		<form action='send_msg.php?u=$kullanici_adi' method='post'>
 		<h2>Mesaj Icerigi : ($kullanici_adi)</h2>
-		<textarea cols='50' rows='12' name='msg_body'>Gondermek Istedigin Mesaji Giriniz</textarea><p />
+		<p /><input type='text' name='msg_title' size='30' onClick=\"value=''\" value='Mesajinin Basligini Giriniz ...'><p />
+		<textarea cols='80' rows='18' name='msg_body'>Gondermek Istedigin Mesaji Giriniz</textarea><p />
 		<input type='submit' name='submit' value='Mesaj Gonder'>
 		</form>
 		";
