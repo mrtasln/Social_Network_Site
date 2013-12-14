@@ -1,7 +1,15 @@
 <?php require_once('Connections/varitabanibaglantim.php'); ?>
-<?php include("deneme1.php"); ?>
+<?php 
+include("deneme1.php");
+?>
 <h2>Okunmamis Mesajlarim:</h2><p />
 <?php
+if(isset($_SESSION['MM_Username'])){
+	$kullanici = $_SESSION['MM_Username'];
+}
+else {
+	$kullanici="";
+}
 
 $grab_messages=mysql_query("SELECT * FROM pvt_messages WHERE user_to='$kullanici' && opened='hayir' && deleted='hayir'");
 $numrows = mysql_numrows($grab_messages);
@@ -15,7 +23,21 @@ while($get_msg=mysql_fetch_assoc($grab_messages)) {
 	$date = $get_msg['date'];
 	$opened = $get_msg['opened'];
 	$deleted = $get_msg['deleted'];
-?>
+	?>
+    <script language="javascript">
+function toggle<?php echo $id; ?>() {
+	var ele = document.getElementById("toggleText<?php echo $id; ?>");
+	var text = document.getElementById("displayText<?php echo $id; ?>");
+	if(ele.style.display == "block") {
+		ele.style.display = "none";
+	}
+	else
+	{
+		ele.style.display = "block";
+	}
+}
+
+</script>
     <?php
 	
 	if(strlen($msg_title)> 50) {
@@ -33,10 +55,38 @@ while($get_msg=mysql_fetch_assoc($grab_messages)) {
 	if(@$_POST['setopened_' . $id . '']) {
 	$setopened_query = mysql_query("UPDATE pvt_messages SET opened='evet' WHERE id='$id'");
 	}
+	
+	echo "
+	<form method='post' action='mesajlarim.php' name='$msg_title'>
+	<b><a href='profile.php?u=$user_from'>$user_from</a></b>
+	<input type='button' name='openmsg' value='$msg_title' onclick='javascript:toggle$id()'>
+	<input type='submit' name='setopened_$id' value='Ben bunu okudum'>
+	<input type='submit' name='reply_$id' value='Cevapla'>
+	</form>
+<div id='toggleText$id' style='display: none;'>
+<br />$msg_body
+</div>
+<hr /><br />
+";
 }
 }
 else
 {
 echo "Sen Okumak İcin Bir Mesaj a Sahip Degilsin";	
 }
+	
 ?>
+
+<h2>Okunmus Mesajlarim:</h2><p />
+
+<?php
+if(isset($_SESSION['MM_Username']))
+{
+	$kullanici = $_SESSION['MM_Username'];
+}
+else 
+{
+	$kullanici="";
+}
+?>
+	
