@@ -93,7 +93,8 @@ if($em==$em2)
 		 else
 		 {
 			echo "Tum Alanlari Doldurunuz"; 
-		 }
+			
+	 	 }
       }
 	  else
 	  {
@@ -161,7 +162,7 @@ else
                  <td><input type="text" name="lname" value="" size="32" /></td>
                </tr>
                <tr valign="baseline">
-                 <td nowrap="nowrap" align="right">Kullanıcı Adı:</td>
+                 <td nowrap="nowrap" align="right">Kullanici Adi:</td>
                  <td><input type="text" name="username" value="" size="32" /></td>
                </tr>
                <tr valign="baseline">
@@ -182,7 +183,7 @@ else
                </tr>
                <tr valign="baseline">
                  <td nowrap="nowrap" align="right">&nbsp;</td>
-                 <td><input type="submit" name="submit" value="Kayıt Ol" /></td>
+                 <td><input type="submit" name="submit" value="Kayit Ol" /></td>
                </tr>
              </table>
                <input type="hidden" name="MM_insert" value="form1" />
