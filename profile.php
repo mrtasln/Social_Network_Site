@@ -26,15 +26,40 @@ if(isset($_GET['u'])){
 	}
 }
 
-/*$post = @$_POST['post'];
+
+if(isset($_POST['send'])) {
+    $chars1 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	$rand_dir_name = substr(str_shuffle($chars1), 0, 15);
+	mkdir("video/$rand_dir_name");
+
+
+	/*if(((@$_FILES["yukleme"]["type"]=="video/mp4") || (@$_FILES["yukleme"]["type"]=="video/avi") || (@$_FILES["yukleme"]["type"]=="video/DAT")))
+{
+	$post_video = @$_FILES["yukleme"]["name"];
+	$string= "http://localhost:81/SocialNet/video/$rand_dir_name/$post_video";
+}
+else
+{
+	$string= "";
+	
+}*/
+//$file=$_FILES['yukleme'];
+
+//move_uploaded_file(@$_FILES["yukleme"]["name"],"video/$rand_dir_name/$file");
+$post_video = @$_FILES["yukleme"]["name"];
+$string= "http://localhost:81/SocialNet/video/$rand_dir_name/$post_video";
+$string = "";
+	$post = @$_POST['post'];
 	if($post != "") {
 		$date_added = date("Y-m-d");
-		$added_by= $kullanici_adi;
-		$user_posted_to = "test123";
+		$added_by= $kullanici;
+		$user_posted_to = $kullanici_adi;
 		
-		$sqlCommand = "INSERT INTO posts VALUES('','$post','$date_added','$added_by','$user_posted_to')";
+		
+		$sqlCommand = "INSERT INTO posts VALUES('','$post','$date_added','$added_by','$user_posted_to','$string')";
 		$query=mysql_query($sqlCommand) or die (mysql_error());
-	*/
+	}
+}
 
 	
 	$check_pic=mysql_query("SELECT profil_resmi FROM uyeler WHERE kullanici_adi='$kullanici_adi'");
@@ -47,32 +72,79 @@ if(isset($_GET['u'])){
 	{
 	$profil_pic="userdata/profile_pics/".$profile_pic_db;	
 	}
+
 	
 ?>
 <div id="status"></div>
 <div class="postForm">
-<form action="profile.php?u=<?php  echo $_SESSION['MM_Username'] ?>" method="post">
+<form action="profile.php?u=<?php  echo $kullanici_adi; ?>" method="post">
 <textarea id="post" name="post" rows="5" cols="251"></textarea>
-<input type="submit" name="send" value="Post" style="background-color:#DCE5EE; float:right; border: 1px solid #666; color:#666; height:73px; width:65px;" />
+<input type="submit" name="send" value="Post" style="background-color:#DCE5EE; float:right; border: 1px solid #666; color:#666; height:70px; width:65px;" /><p />
+<input type="file" accept="video/mp4,video/x-m4v,video/*" name="yukleme" id="yukleme" />
+<p /><p />
 </form>
+<p /><br />
 </div>
 <div class="profilePosts">
 <?php 
-/*$getposts=mysql_query("SELECT * FROM posts WHERE user_posted_to='$kullanici_adi' ORDER BY");
+$getposts=mysql_query("SELECT * FROM posts WHERE user_posted_to='$kullanici_adi' ORDER BY id DESC LIMIT 10") or die(mysql_error());
 while($row = mysql_fetch_assoc($getposts)) {
 	                                       $id=$row['id'];
 										   $body=$row['body'];
 										   $date_added=$row['date_added'];
-										   $added_by=$row['user_posted_to'];
+										   $added_by=$row['added_by'];
+										   $user_posted_to=$row['user_posted_to'];
+										   $video = $row['video'];
+										   
+										   $get_user_info=mysql_query("SELECT * FROM uyeler WHERE kullanici_adi='$added_by'"); 
+										   $get_info=mysql_fetch_assoc($get_user_info);
+										   $profilpic_info=$get_info['profil_resmi'];
+
 										   
 										   echo "
-										   <div class='posted_by'><a href='$added_by'
+										   <p />
+										   <div style='float: left;'>
+										   <img src='userdata/profile_pics/$profilpic_info' height='60'>
+										   </div>
+										   <div class='posted_by'>
+										   <a href='$added_by'>Yayinlayan Kisi: $added_by</a><br />Tarih: $date_added <br /></div>
+										   <br /><br />
+										   <div style='max-width: 600px;'>
+										   $body<br /><br /><br />
 										   ";
+										   if($video != "")
+										   {
+										   echo "
+										   <video width='400' height='300' controls='controls'>
+										   <source src='$video' type='video/mp4' />
+										   </video><br />
+										   
+
+										   </div>
+										   <hr />
+										   ";
+										   }
+										   else
+										   {
+											 echo "
+											 <br /><br />
+										   </div>
+										   <hr />
+										   ";  
+											   
+										   }
 }
-	*/									    
+								    
 
 if(isset($_POST['sendmsg'])) {
+	if($kullanici!=$kullanici_adi)
+	{
 header("Location: send_msg.php?u=$kullanici_adi");	
+	}
+	else
+	{
+		header("Location profile.php?u=$kullanici_adi");
+	}
 }
 
 $errorMsg = "";
