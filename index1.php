@@ -59,7 +59,7 @@ if($em==$em2)
 	       {
                      if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "form1")) 
 					 {
-                     $insertSQL = sprintf("INSERT INTO uyeler (isim, soyisim, kullanici_adi, email1, sifre1) VALUES (%s, %s, %s, %s, %d)",
+                     $insertSQL = sprintf("INSERT INTO uyeler (isim, soyisim, kullanici_adi, email1, sifre1,closed) VALUES (%s, %s, %s, %s, %d, 'hayir')",
                        GetSQLValueString($_POST['fname'], "text"),
                        GetSQLValueString($_POST['lname'], "text"),
                        GetSQLValueString($_POST['username'], "text"),
@@ -87,24 +87,24 @@ if($em==$em2)
 	         }
 	         else
 	         { 
-	       	 echo "Sifreler uyusmadi";
+	       	 echo "<script>alert('Sifreler uyusmadi')</script>";
 	         }
 	     }
 		 else
 		 {
-			echo "Tum Alanlari Doldurunuz"; 
+			echo "<script>alert('Tum Alanlari Doldurunuz')</script>"; 
 			
 	 	 }
       }
 	  else
 	  {
-		  echo "Boyle bir Kullanici Adi Zaten Var "; 
+		  echo "<script>alert('Boyle bir Kullanici Adi Zaten Var')</script>"; 
 		  
 	  }
 }
 else
 {
-	echo "Email ler uyusmadi";
+	echo "<script>alert('Email ler uyusmadi')</script>";
 	
 }
 }
@@ -130,7 +130,6 @@ else
      
     <div id="menu">
       <a href="index1.php">AnaSayfa</a>
-      <a href="hakkimizda.php">Hakkinda</a>
       <a href="KayitOl2.php">Kayit Ol</a>
       <a href="GirisSayfasi.php">Giris Yap</a>
     </div>

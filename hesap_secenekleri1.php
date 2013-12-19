@@ -430,23 +430,24 @@ else
     </div>
      
     <div id="menu">
-      <a href="index.php">AnaSayfa</a>
+      <a href="anasayfa.php">AnaSayfa</a>
       <a href="profile.php?u=<?php  echo $_SESSION['MM_Username'] ?>"><?php  echo $_SESSION['MM_Username'] ?>'in Profili</a>
       <a href="hesap_secenekleri1.php">Hesap Secenekleri</a>
       <a href="mesajlarim.php">Mesajlarım <?php echo $unread_numrows; ?></a>
+      <a href="durtme_sayfasi.php">Durtmelerim</a>
       <a href="<?php echo $logoutAction ?>">Cikis Yap</a>
     </div>
 </div>
 </div>
 <p><br />
   <br />
-</p>
+</p>  
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p><br />
 </p>
 <form action="<?php echo $editFormAction2; ?>" name="form4" id="form4" method="post" enctype="multipart/form-data" >
-  <h1><strong>Profil Resmini Sec </strong></h1>
+  <h1><strong>PROFIL RESMINI GUNCELLE </strong></h1>
   <p><img src="<?php echo $profil_pic; ?>" width="70" />
   <input type="hidden"  name="kullaniciAdi" id="kullaniciAdi" value="<?php  echo $_SESSION['MM_Username'] ?>" />
   <input type="file" name="profilepic" id="profilpic" /><br />
@@ -495,15 +496,15 @@ else
         </p>
       <p>
         <label for="isim"></label>
-        <input type="text" name="isim" id="isim" placeholder="İsim" value="<?php echo htmlentities($row_Recordset1['isim'], ENT_COMPAT, 'utf-8'); ?>" size="32" />
+        <input type="text" name="isim" id="isim" placeholder="İsim" size="32" />
       </p>
       <p>
         <label for="soyisim"></label>
-      <input type="text" name="soyisim" id="soyisim" placeholder="Soyisim" value="<?php echo htmlentities($row_Recordset1['soyisim'], ENT_COMPAT, 'utf-8'); ?>" size="32" />
+      <input type="text" name="soyisim" id="soyisim" placeholder="Soyisim" size="32" />
 </p>
 
     <p>
-    <input type="text" name="email" id="email" placeholder="Email" value="<?php echo htmlentities($row_Recordset1['email1'], ENT_COMPAT, 'utf-8'); ?>" size="32" />
+    <input type="text" name="email" id="email" placeholder="Email" size="32" />
     </p>
     <p>
     </p>
@@ -520,6 +521,15 @@ else
   </tr>
 
 </table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+    <p>
+    <hr />
+<form id="form5" name="form5" method="post" action="hesap_kapatma.php">
+<p>HESAP KAPATMA</p>
+<p>&nbsp;</p>
+<input type="submit" name="closeaccount" id="closeaccount" value="Hesap Kapatmak Istiyorum"  />
+</form>
 
 </body>
 </html>

@@ -46,12 +46,12 @@ if (isset($_POST['user'])) {
   $loginUsername=$_POST['user'];
   $password=$_POST['password'];
   $MM_fldUserAuthorization = "";
-  $MM_redirectLoginSuccess = "index.php";
+  $MM_redirectLoginSuccess = "anasayfa.php";
   $MM_redirectLoginFailed = "hata.php";
   $MM_redirecttoReferrer = false;
   mysql_select_db($database_varitabanibaglantim, $varitabanibaglantim);
   
-  $LoginRS__query=sprintf("SELECT kullanici_adi, sifre FROM giris WHERE kullanici_adi=%s AND sifre=%s",
+  $LoginRS__query=sprintf("SELECT g.kullanici_adi, g.sifre FROM giris g,uyeler u WHERE g.kullanici_adi=%s AND g.sifre=%s AND u.closed='hayir' AND u.kullanici_adi=g.kullanici_adi",
     GetSQLValueString($loginUsername, "text"), GetSQLValueString($password, "text")); 
    
   $LoginRS = mysql_query($LoginRS__query, $varitabanibaglantim) or die(mysql_error());
@@ -95,7 +95,6 @@ if (isset($_POST['user'])) {
      
     <div id="menu">
       <a href="index1.php">AnaSayfa</a>
-      <a href="hakkimizda.php">Hakkinda</a>
       <a href="KayitOl2.php">Kayit Ol</a>
       <a href="GirisSayfasi.php">Giris Yap</a>
     </div>

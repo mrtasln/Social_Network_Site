@@ -88,24 +88,22 @@ if($em==$em2)
 	         }
 	         else
 	         { 
-	       	 echo "Sifreler uyusmadi";
+			 echo "<script>alert('Sifreler uyusmadi')</script>";
 	         }
 	     }
 		 else
 		 {
-			echo "Tum Alanlari Doldurunuz"; 
+			echo "<script>alert('Tum Alanlari Doldurunuz')</script>";
 		 }
       }
 	  else
 	  {
-		  echo "Boyle bir Kullanici Adi Zaten Var "; 
-		  
+		  echo "<script>alert('Boyle bir Kullanici Adi Zaten Var ')</script>";
 	  }
 }
 else
 {
-	echo "Email ler uyusmadi";
-	
+	echo "<script>alert('Email ler uyusmadi ')</script>";
 }
 }
 ?>
@@ -131,7 +129,6 @@ else
      
     <div id="menu">
       <a href="index1.php">AnaSayfa</a>
-      <a href="hakkimizda.php">Hakkinda</a>
       <a href="KayitOl2.php">Kayit Ol</a>
       <a href="GirisSayfasi.php">Giris Yap</a>
     </div>

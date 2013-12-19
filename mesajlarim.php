@@ -61,7 +61,6 @@ function toggle<?php echo $id; ?>() {
 	<b><a href='profile.php?u=$user_from'>$user_from</a></b>
 	<input type='button' name='openmsg' value='$msg_title' onclick='javascript:toggle$id()'>
 	<input type='submit' name='setopened_$id' value='Ben bunu okudum'>
-	<input type='submit' name='reply_$id' value='Cevapla'>
 	</form>
 <div id='toggleText$id' style='display: none;'>
 <br />$msg_body
@@ -76,16 +75,12 @@ echo "Sen Okumak İcin Bir Mesaj a Sahip Degilsin";
 }
 	
 ?>
-
 <h2>Okunmus Mesajlarim:</h2><p />
-
 <?php
-if(isset($_SESSION['MM_Username']))
-{
+if(isset($_SESSION['MM_Username'])){
 	$kullanici = $_SESSION['MM_Username'];
 }
-else 
-{
+else {
 	$kullanici="";
 }
 
@@ -126,6 +121,9 @@ function toggle<?php echo $id; ?>() {
 	
 	if(@$_POST['delete_' . $id . '']) {
 	$delete_msg_query = mysql_query("UPDATE pvt_messages SET deleted='evet' WHERE id='$id'");
+	}
+	if(@$_POST['reply_' . $id . '']) {
+		header("Location: mesaj_cevapla.php?u=$user_from");
 	}
 	
 	echo "

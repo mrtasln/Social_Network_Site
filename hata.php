@@ -19,7 +19,6 @@
      
     <div id="menu">
       <a href="index1.php">AnaSayfa</a>
-      <a href="#">Hakkinda</a>
       <a href="KayitOl2.php">Kayit Ol</a>
       <a href="GirisSayfasi.php">Giris Yap</a>
     </div>

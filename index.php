@@ -105,6 +105,7 @@ $unread_numrows = "";
       <a href="profile.php?u=<?php  echo $_SESSION['MM_Username'] ?>"><?php  echo $_SESSION['MM_Username'] ?>'in Profili</a>
       <a href="hesap_secenekleri1.php">Hesap Secenekleri</a>
       <a href="mesajlarim.php">Mesajlarım <?php echo $unread_numrows; ?></a>
+      <a href="durtme_sayfasi.php">Durtmelerim</a>
       <a href="<?php echo $logoutAction ?>">Cikis Yap</a>
     </div>
 </div>
