@@ -292,7 +292,7 @@ tr td p {
 .postForm{
 	float: right;
 	width: 85%;
-	height: 80px;
+	height: 90px;
 	background-color:#DBDBDB;
 	padding: 5px;
 }
@@ -300,9 +300,9 @@ tr td p {
 	float: right;
 	width: 85%;
 	height: 414px;
-	background-color: #DCE5EE;
+	background-color: #eff5f9;
 	padding: 5px;
-	text-align: justify;
+	text-align:justify;
 }
 .profilePosts hr {
 	background-color: #DCE5EE;
@@ -339,3 +339,32 @@ tr td p {
 #resim p br {
 	font-size: 20px;
 }
+.newsFeed h2 {
+	width: 100%;
+	background-color: #AFDEAD;
+	border: 0px solid #DCE5EE;
+	font-size: 15px;
+}
+.newsFeedPost {
+	width: 50%;
+	background-color: #eff5f9;
+	border: 1px solid #F3F6F9;	
+}
+.newsFeedPostOptions {
+	width: 100%;
+	background-color: #F2F2F2;
+	border: 0px;
+	padding: 5px 5px 5px 5px - 10px;
+	margin-bottom: 4px;
+}
+
+#form4 {
+	text-align: center;
+	vertical-align: middle;
+	font-size: 14px;
+}
+#form5 {
+	text-align: center;
+	vertical-align: middle;
+}
+

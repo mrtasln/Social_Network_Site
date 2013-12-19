@@ -169,7 +169,7 @@ else
 }
 ?>
 </div>
-<img src="<?php echo $profil_pic; ?>" height="250" width="200" alt="<?php echo $kullanici_adi; ?>'in Profili" title="<?php echo $kullanici_adi; ?>'in Profili" />
+<img src="<?php echo $profil_pic; ?>" height="250" width="220" alt="<?php echo $kullanici_adi; ?>'in Profili" title="<?php echo $kullanici_adi; ?>'in Profili" />
 <br />
 <form action="profile.php?u=<?php  echo $kullanici_adi; ?>" method="post">
 <?php
@@ -186,10 +186,13 @@ if($friendArray != "") {
 	$friendsArray12 = array_slice($friendArray, 0, 12);
 $i = 0;
 if(in_array($kullanici,$friendArray)) {
+	
 	$addAsFriend = '<input type="submit" name="removefriend" value="Arkadas Cikar">';
+
 }
 else
 {
+	if($kullanici_adi!=$kullanici)
 	$addAsFriend = '<input type="submit" name="addfriend" value="Arkadas Ekle">';
 }
 echo $addAsFriend;
@@ -250,12 +253,56 @@ if(@$_POST['removefriend']) {
 	  header("Location: profile.php?u=$kullanici_adi");
 		
 }
+if(@$_POST['poke']) {
+	$check_if_pocked = mysql_query("SELECT * FROM pokes WHERE user_to='$kullanici_adi' && user_from='$kullanici'");
+	$num_poke_found = mysql_num_rows($check_if_pocked);
+	if($num_poke_found != 0) {
+		echo "geri dürtmeyi beklemek zorundasin";
+	}
+	else
+	if($kullanici_adi == $kullanici) {
+		echo "Sen kendini dürtemezsin";
+	}
+	else
+	{
+	$poke_user=mysql_query("INSERT INTO pokes VALUES ('','$kullanici','$kullanici_adi')");
+	echo "$kullanici_adi dürtüldü";
+	}
+}
 	
+	    $check_like_button = mysql_query("SELECT * FROM like_buttons WHERE uid='$kullanici_adi'");
+		$check_like_numrows = mysql_num_rows($check_like_button);
+		if($check_like_numrows >= 1) {
+			
+		}
+		else
+		{
+			$date = date("Y-m-d");
+		$create_button = mysql_query("INSERT INTO like_buttons VALUES ('','$kullanici_adi','http://localhost:81/SocialNet/$kullanici_adi','$date','$kullanici_adi')");
+		$insert_like = mysql_query("INSERT INTO likes VALUES('','$kullanici_adi','-1','$kullanici_adi')");
+		}
 ?>
 <?php
 echo $errorMsg;
 ?>
-<input type="submit" name="sendmsg" value="Mesaj Gonder" />
+<?php
+if($kullanici_adi!=$kullanici)
+{
+	?>
+<input type="submit" name="poke" value="Dürt" />
+<input type="submit" name="sendmsg" value="Mesaj At" />
+<iframe src='http://localhost:81/SocialNet/like_islemleri.php?uid=<?php echo $kullanici_adi; ?>' style='border: 0px; height: 35px; width: 120px;'></iframe>
+<?php
+}
+else
+{
+?>
+<iframe src='http://localhost:81/SocialNet/like_islemleri.php?uid=<?php echo $kullanici_adi; ?>' style='border: 0px; height: 35px; width: 120px;'></iframe>
+<?php
+}
+
+
+?>
 </form>
 <div class="textHeader"><?php echo $kullanici_adi; ?>'in Profili</div>
 <div class="profileLeftSideContent">
@@ -294,5 +341,9 @@ if($countFriends != 0){
 else
 echo $kullanici_adi."henuz arkadasa sahip degil";
 ?>
+</div>
+<div class="textHeader"><?php echo $kullanici_adi; ?>'in Albumleri</div>
+<div class="profileLeftSideContent">
+<a href="albumleri_gor.php?u=<?php echo $kullanici_adi; ?>"><input type="submit" name="View Albums" value="Albumleri Gor" /></a>
 </div>
 
