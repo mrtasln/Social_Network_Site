@@ -108,19 +108,25 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
 </head>
 <body>
 <div class="headerMenu">
- <div id="wrapper">
-   <div class="logo">
+<div id="wrapper">
+<div class="logo">
      <img src="img/Z.png">
    </div>
    <div class="search_box">
         <form method="GET" action="search.php" id="search">
         <input name="q" type="text" size="60" placeholder="search . . ." />
+        <a id="istekler" href="friend_requests.php">&nbsp;&nbsp;&nbsp;&nbsp;Arkadaslik Istekleri</a>
         </form>
     </div>
-     
     <div id="menu">
       <a href="anasayfa.php">AnaSayfa</a>
-      <a href="profile.php?u=<?php  echo $_SESSION['MM_Username'] ?>"><?php  echo $_SESSION['MM_Username'] ?>'in Profili</a>
+      <a href="profile.php?u=<?php echo $_SESSION['MM_Username'] ?>"><?php
+	  $user=$_SESSION['MM_Username'];
+	  $sorgu = mysql_query("SELECT * FROM uyeler WHERE kullanici_adi='$user'");
+		$get=mysql_fetch_assoc($sorgu);
+		$isim=$get['isim'];
+		$soyisim=$get['soyisim'];
+	    echo $isim; echo " "; echo $soyisim; ?>'in Profili</a>
       <a href="hesap_secenekleri1.php">Hesap Secenekleri</a>
       <a href="mesajlarim.php">Mesajlarım <?php echo $unread_numrows; ?></a>
       <a href="durtme_sayfasi.php">Durtmelerim</a>

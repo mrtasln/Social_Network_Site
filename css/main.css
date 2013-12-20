@@ -17,13 +17,26 @@ position:fixed;
 	}
 	
 #wrapper{
-	margin-left:auto;
-	margin-right:auto;
+	margin-left:inherit;
+	margin-right:inherit;
 	width:1000px;
 	padding-top:0px;
 	padding-bottom:0px;
 	background-image:url(../img/menu.png);
 	}
+	
+	#istekler{
+	color:#FFFFFF;
+	text-decoration:none;
+	font-size:16px;
+	background-image:url(../img/menu.png);
+	background-repeat:no-repeat;
+	padding-top:16px;
+	padding-bottom:22px;
+	padding-left:10px;
+	padding-right:10px;
+}
+
 	
 .logo{
 	width:38px;
@@ -34,12 +47,14 @@ position:fixed;
 	width:38px;
 	height:38px;
 	background-image:url(../img/menu.png);
+	
 	}
 
 .search_box{
 	background-image:url(../img/menu.png);
+	background-color:#090;
 	position:absolute; top:13px;
-	margin-left:125px;
+	margin-left:80px;
 }
 
 #search input[type="text"]{
@@ -79,6 +94,7 @@ position:fixed;
 	margin-right:4%;
 }
 }
+
 
 @media screen and (min-width:1280px){
 #menu{
@@ -368,3 +384,47 @@ tr td p {
 	vertical-align: middle;
 }
 
+#form4 h1 strong {
+	font-size: 24px;
+}
+#form5 p label {
+	font-size: 24px;
+}
+#form5 p {
+	font-size: 24px;
+}
+#hesapkapatma {
+	font-size: 18px;
+}
+#hesapkapatma {
+	vertical-align: middle;
+}
+#hesapkapatma p span {
+	font-size: 18px;
+}
+.albums {
+	background-color:  #D0E8E7;
+	border: 1px solid #F3F6F9;
+	padding: 3px;
+	width: 200px;
+	height: 200px;
+	margin-right: 10px;
+	text-align: center;
+}
+.albums:hover {
+	background-color: #B3CAAC;
+	border: 1px solid #F3F6F9;
+}
+#resim_yukle {
+	text-align: right;
+	vertical-align: middle;
+}
+#geri_gitme {
+	font-size: 16px;
+}
+#description {
+	background: #DAE8E9;
+}
+#uid {
+	background: #DAE8E9;
+}
