@@ -28,37 +28,32 @@ if(isset($_GET['u'])){
 
 
 if(isset($_POST['send'])) {
+
     $chars1 = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 	$rand_dir_name = substr(str_shuffle($chars1), 0, 15);
 	mkdir("video/$rand_dir_name");
 
-
-	/*if(((@$_FILES["yukleme"]["type"]=="video/mp4") || (@$_FILES["yukleme"]["type"]=="video/avi") || (@$_FILES["yukleme"]["type"]=="video/DAT")))
+move_uploaded_file(@$_FILES["yukleme"]["tmp_name"],"video/$rand_dir_name/".@$_FILES["yukleme"]["name"]);
+$post_video = @$_FILES["yukleme"]["name"];
+if($post_video!="")
 {
-	$post_video = @$_FILES["yukleme"]["name"];
-	$string= "http://localhost:81/SocialNet/video/$rand_dir_name/$post_video";
+$string= "http://localhost:81/SocialNet/video/$rand_dir_name/$post_video";
 }
 else
 {
-	$string= "";
-	
-}*/
-//$file=$_FILES['yukleme'];
+$string= "";
+}
 
-//move_uploaded_file(@$_FILES["yukleme"]["name"],"video/$rand_dir_name/$file");
-$post_video = @$_FILES["yukleme"]["name"];
-$string= "http://localhost:81/SocialNet/video/$rand_dir_name/$post_video";
-$string = "";
 	$post = @$_POST['post'];
-	if($post != "") {
 		$date_added = date("Y-m-d");
 		$added_by= $kullanici;
 		$user_posted_to = $kullanici_adi;
 		
 		
-		$sqlCommand = "INSERT INTO posts VALUES('','$post','$date_added','$added_by','$user_posted_to','$string')";
-		$query=mysql_query($sqlCommand) or die (mysql_error());
-	}
+		$sqlCommand1 = "INSERT INTO posts VALUES('','$post','$date_added','$added_by','$user_posted_to','$string')";
+		$query=mysql_query($sqlCommand1) or die (mysql_error());
+	
+
 }
 
 	
@@ -77,10 +72,10 @@ $string = "";
 ?>
 <div id="status"></div>
 <div class="postForm">
-<form action="profile.php?u=<?php  echo $kullanici_adi; ?>" method="post">
+<form action="" method="post" enctype="multipart/form-data">
 <textarea id="post" name="post" rows="5" cols="251"></textarea>
-<input type="submit" name="send" value="Post" style="background-color:#DCE5EE; float:right; border: 1px solid #666; color:#666; height:70px; width:65px;" /><p />
-<input type="file" accept="video/mp4,video/x-m4v,video/*" name="yukleme" id="yukleme" />
+<input type="submit" name="send" id="send" value="Post" style="background-color:#DCE5EE; float:right; border: 1px solid #666; color:#666; height:70px; width:65px;" /><p />
+<input type="file" name="yukleme" id="yukleme" />
 <p /><p />
 </form>
 <p /><br />
@@ -96,6 +91,14 @@ while($row = mysql_fetch_assoc($getposts)) {
 										   $user_posted_to=$row['user_posted_to'];
 										   $video = $row['video'];
 										   
+										   
+	                                       $user1=$_SESSION['MM_Username'];
+	                                       $sorgu = mysql_query("SELECT * FROM uyeler WHERE kullanici_adi='$added_by'");
+		                                   $get=mysql_fetch_assoc($sorgu);
+		                                   $isim1=$get['isim'];
+		                                   $soyisim1=$get['soyisim'];
+	                                       
+										   
 										   $get_user_info=mysql_query("SELECT * FROM uyeler WHERE kullanici_adi='$added_by'"); 
 										   $get_info=mysql_fetch_assoc($get_user_info);
 										   $profilpic_info=$get_info['profil_resmi'];
@@ -107,7 +110,7 @@ while($row = mysql_fetch_assoc($getposts)) {
 										   <img src='userdata/profile_pics/$profilpic_info' height='60'>
 										   </div>
 										   <div class='posted_by'>
-										   <a href='$added_by'>Yayinlayan Kisi: $added_by</a><br />Tarih: $date_added <br /></div>
+										   <a href='http://localhost:81/SocialNet/profile.php?u=$added_by'>Yayinlayan Kisi: $isim1 $soyisim1</a><br />Tarih: $date_added <br /></div>
 										   <br /><br />
 										   <div style='max-width: 600px;'>
 										   $body<br /><br /><br />
@@ -169,7 +172,21 @@ else
 }
 ?>
 </div>
-<img src="<?php echo $profil_pic; ?>" height="250" width="220" alt="<?php echo $kullanici_adi; ?>'in Profili" title="<?php echo $kullanici_adi; ?>'in Profili" />
+<img src="<?php echo $profil_pic; ?>" height="250" width="220" 
+alt="<?php
+	  $user=$_SESSION['MM_Username'];
+	  $sorgu = mysql_query("SELECT * FROM uyeler WHERE kullanici_adi='$user'");
+		$get=mysql_fetch_assoc($sorgu);
+		$isim=$get['isim'];
+		$soyisim=$get['soyisim'];
+	    echo $isim; echo " "; echo $soyisim; ?>'in Profili" 
+title="<?php
+	  $user=$_SESSION['MM_Username'];
+	  $sorgu = mysql_query("SELECT * FROM uyeler WHERE kullanici_adi='$user'");
+		$get=mysql_fetch_assoc($sorgu);
+		$isim=$get['isim'];
+		$soyisim=$get['soyisim'];
+	    echo $isim; echo " "; echo $soyisim; ?>'in Profili" />
 <br />
 <form action="profile.php?u=<?php  echo $kullanici_adi; ?>" method="post">
 <?php
@@ -266,7 +283,11 @@ if(@$_POST['poke']) {
 	else
 	{
 	$poke_user=mysql_query("INSERT INTO pokes VALUES ('','$kullanici','$kullanici_adi')");
-	echo "$kullanici_adi dürtüldü";
+	$sorgu = mysql_query("SELECT * FROM uyeler WHERE kullanici_adi='$kullanici_adi'");
+		$get=mysql_fetch_assoc($sorgu);
+		$isim1=$get['isim'];
+		$soyisim1=$get['soyisim'];
+	echo "$isim1 $soyisim1 dürtüldü";
 	}
 }
 	
@@ -304,7 +325,13 @@ else
 
 ?>
 </form>
-<div class="textHeader"><?php echo $kullanici_adi; ?>'in Profili</div>
+<div class="textHeader"><?php
+	  $user=mysql_real_escape_string($_GET['u']);
+	  $sorgu = mysql_query("SELECT * FROM uyeler WHERE kullanici_adi='$user'");
+		$get=mysql_fetch_assoc($sorgu);
+		$isim=$get['isim'];
+		$soyisim=$get['soyisim'];
+	    echo $isim; echo " "; echo $soyisim; ?>'in Profili</div>
 <div class="profileLeftSideContent">
 
 <?php
@@ -315,7 +342,13 @@ $about_the_user=$get_result['biyografi'];
 echo $about_the_user;
 ?>
 </div>
-<div class="textHeader"><?php echo $kullanici_adi; ?>'in Arkadaslari</div>
+<div class="textHeader"><?php
+	  $user=mysql_real_escape_string($_GET['u']);
+	  $sorgu = mysql_query("SELECT * FROM uyeler WHERE kullanici_adi='$user'");
+		$get=mysql_fetch_assoc($sorgu);
+		$isim=$get['isim'];
+		$soyisim=$get['soyisim'];
+	    echo $isim; echo " "; echo $soyisim; ?>'in Arkadaslari</div>
 <div class="profileLeftSideContent">
 <?php
 if($countFriends != 0){
@@ -328,12 +361,20 @@ if($countFriends != 0){
 		
 		if($friendProfilePic == "") {
 			if($friendUsername != "") {
-			echo "<a href='profile.php?u=$friendUsername'><img src='img/images.jpg' alt=\"$friendUsername'in Profili\" title=\"$friendUsername'in Profili\" height='50' width='40' style='padding-right: 6px;'></a>";
+	  $sorgu3 = mysql_query("SELECT * FROM uyeler WHERE kullanici_adi='$friendUsername'");
+		$get=mysql_fetch_assoc($sorgu3);
+		$isim2=$get['isim'];
+		$soyisim2=$get['soyisim'];
+			echo "<a href='profile.php?u=$friendUsername'><img src='img/images.jpg' alt=\"$friendUsername'in Profili\" title=\"$isim2 $soyisim2'in Profili\" height='50' width='40' style='padding-right: 6px;'></a>";
 			}
 		}
 		else
 		{
-			echo "<a href='profile.php?u=$friendUsername'><img src='userdata/profile_pics/$friendProfilePic' alt=\"$friendUsername'in Profili\" title=\"$friendUsername'in Profili\" height='50' width='40' style='padding-right: 6px;'></a>";
+			$sorgu3 = mysql_query("SELECT * FROM uyeler WHERE kullanici_adi='$friendUsername'");
+		$get=mysql_fetch_assoc($sorgu3);
+		$isim3=$get['isim'];
+		$soyisim3=$get['soyisim'];
+			echo "<a href='profile.php?u=$friendUsername'><img src='userdata/profile_pics/$friendProfilePic' alt=\"$friendUsername'in Profili\" title=\"$isim3 $soyisim3'in Profili\" height='50' width='40' style='padding-right: 6px;'></a>";
 		}
 	}
 	
@@ -342,7 +383,13 @@ else
 echo $kullanici_adi."henuz arkadasa sahip degil";
 ?>
 </div>
-<div class="textHeader"><?php echo $kullanici_adi; ?>'in Albumleri</div>
+<div class="textHeader"><?php
+	  $user=mysql_real_escape_string($_GET['u']);
+	  $sorgu = mysql_query("SELECT * FROM uyeler WHERE kullanici_adi='$user'");
+		$get=mysql_fetch_assoc($sorgu);
+		$isim=$get['isim'];
+		$soyisim=$get['soyisim'];
+	    echo $isim; echo " "; echo $soyisim; ?>'in Albumleri</div>
 <div class="profileLeftSideContent">
 <a href="albumleri_gor.php?u=<?php echo $kullanici_adi; ?>"><input type="submit" name="View Albums" value="Albumleri Gor" /></a>
 </div>
