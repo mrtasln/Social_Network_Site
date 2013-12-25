@@ -14,7 +14,7 @@ else {
 $friendRequests = mysql_query("SELECT * FROM friend_requests WHERE user_to='$kullanici'");
 $numrows = mysql_num_rows($friendRequests);
 if($numrows == 0) {
-	echo "Arkadaslik Istegin Yok";
+	echo "<h2>Arkadaslik Istegin Yok</h2>";
 	$user_from = "";
 }
 else
@@ -24,7 +24,12 @@ else
 		$user_to = $get_row['user_to'];
 		$user_from = $get_row['user_from'];
 		
-		echo '' . $user_from . ' arkadas olmak istiyor'.'<br />';
+		$sorgu = mysql_query("SELECT * FROM uyeler WHERE kullanici_adi='$user_from'");
+		$get=mysql_fetch_assoc($sorgu);
+		$isim1=$get['isim'];
+		$soyisim1=$get['soyisim'];
+		
+		echo '' . $isim1 ." ". $soyisim1 . ' arkadas olmak istiyor'.'<br />';
 		
 
 ?>

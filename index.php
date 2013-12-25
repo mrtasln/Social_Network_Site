@@ -87,6 +87,7 @@ $unread_numrows = "";
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/main.css" rel="stylesheet" type="text/css">
 <title>Sosyal Paylasim Sitesi</title>
+<link rel="shortcut icon" href="http://localhost:81/SocialNet/img/Z.png" />
 </head>
 <body>
 <div class="headerMenu">

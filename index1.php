@@ -113,8 +113,11 @@ else
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="Bu bir sosyal paylasım sitesidir" />
+<meta name="keywords" content="social, network, site, soysal, paylasim, paylaşım, networking" />
 <link href="css/main.css" rel="stylesheet" type="text/css">
 <title>Sosyal Paylasim Sitesi</title>
+<link rel="shortcut icon" href="http://localhost:81/SocialNet/img/Z.png" />
 </head>
 <body>
 <div class="headerMenu">
@@ -129,9 +132,9 @@ else
     </div>
      
     <div id="menu">
-      <a href="index1.php">AnaSayfa</a>
-      <a href="KayitOl2.php">Kayit Ol</a>
-      <a href="GirisSayfasi.php">Giris Yap</a>
+      <a href="index1.php"><img src="img/ikonlar/home.png" height="15" width="26" />AnaSayfa</a>&nbsp;&nbsp;
+      <a href="KayitOl2.php"><img src="img/ikonlar/address.png" height="15" width="26" />Kayit Ol</a>&nbsp;&nbsp;
+      <a href="GirisSayfasi.php"><img src="img/ikonlar/Login.png" height="15" width="26" />Giris Yap</a>&nbsp;&nbsp;
     </div>
 </div>
 </div>
@@ -170,15 +173,15 @@ else
                </tr>
                <tr valign="baseline">
                  <td nowrap="nowrap" align="right">Email2:</td>
-                 <td><input type="text" name="email2" value="" size="32" /></td>
+                 <td><input type="text" name="email2" size="32" /></td>
                </tr>
                <tr valign="baseline">
                  <td nowrap="nowrap" align="right">Sifre1:</td>
-                 <td><input type="text" name="password" value="" size="32" /></td>
+                 <td><input type="password" name="password" size="32" /></td>
                </tr>
                <tr valign="baseline">
                  <td nowrap="nowrap" align="right">Sifre2:</td>
-                 <td><input type="text" name="password2" value="" size="32" /></td>
+                 <td><input type="password" name="password2" value="" size="32" /></td>
                </tr>
                <tr valign="baseline">
                  <td nowrap="nowrap" align="right">&nbsp;</td>

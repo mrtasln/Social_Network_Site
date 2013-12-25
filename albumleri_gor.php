@@ -21,13 +21,14 @@ if(isset($_GET['u'])){
 }
 
 ?>
-<h3 align="right"><a href="profile.php?u=<?php echo $kullanici_adi; ?>" name="geri_gitme" id="geri_gitme">Geri Git &larr;</a>
+<h3 align="right"><a href="profile.php?u=<?php echo $kullanici_adi; ?>" name="geri_gitme" id="geri_gitme">Geri Git <img src="img/ikonlar/arrow_left_32.png" /></a><br />
 &nbsp;
 <?php
 if($kullanici==$kullanici_adi)
 {
 	?>
-<a href="album_yukle.php?u=<?php echo $kullanici_adi; ?>"><input type="button" name="resim_yukle" id="resim_yukle" value="Album Olustur" /></a></h3>
+<a href="album_yukle.php?u=<?php echo $kullanici_adi; ?>"><img src="img/ikonlar/Add.png" width="32" height="22" />
+<input type="button" name="resim_yukle" id="resim_yukle" value="Album Olustur" /></a></h3>
 <?php
 }
 ?>
@@ -69,7 +70,8 @@ while($row = mysql_fetch_assoc($get_albums)) {
 	</a>
 	<center>
 	<form method='post' action='./albumleri_gor.php?u=$kullanici'>
-	<input type='submit' name='remove_album_$md5_album' value='Albumu Sil'>
+	<input type='submit' name='remove_album_$md5_album' value='Albumu Sil' />
+	<input type='image' src='img/ikonlar/close_16.png' height='18' width='22' name='remove_album_$md5_album' value='Albumu Sil' />
 	</form>
 	</center>
 	</div>

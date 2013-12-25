@@ -46,7 +46,7 @@ if (isset($_POST['user'])) {
   $loginUsername=$_POST['user'];
   $password=$_POST['password'];
   $MM_fldUserAuthorization = "";
-  $MM_redirectLoginSuccess = "anasayfa.php";
+  $MM_redirectLoginSuccess = "ara_menu.php";
   $MM_redirectLoginFailed = "hata.php";
   $MM_redirecttoReferrer = false;
   mysql_select_db($database_varitabanibaglantim, $varitabanibaglantim);
@@ -80,6 +80,7 @@ if (isset($_POST['user'])) {
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/main.css" rel="stylesheet" type="text/css">
 <title>Sosyal Paylasim Sitesi</title>
+<link rel="shortcut icon" href="http://localhost:81/SocialNet/img/Z.png" />
 </head>
 <body>
 <div class="headerMenu">
@@ -94,9 +95,9 @@ if (isset($_POST['user'])) {
     </div>
      
     <div id="menu">
-      <a href="index1.php">AnaSayfa</a>
-      <a href="KayitOl2.php">Kayit Ol</a>
-      <a href="GirisSayfasi.php">Giris Yap</a>
+      <a href="index1.php"><img src="img/ikonlar/home.png" height="15" width="26" />AnaSayfa</a>&nbsp;&nbsp;
+      <a href="KayitOl2.php"><img src="img/ikonlar/address.png" height="15" width="26" />Kayit Ol</a>&nbsp;&nbsp;
+      <a href="GirisSayfasi.php"><img src="img/ikonlar/Login.png" height="15" width="26" />Giris Yap</a>&nbsp;&nbsp;
     </div>
 </div>
 </div>
@@ -116,10 +117,12 @@ if (isset($_POST['user'])) {
            <form id="form1" name="form1" method="POST" action="<?php echo $loginFormAction; ?>">
            <p>&nbsp;</p>
            <p>&nbsp;</p>
-           <p>&nbsp;</p>
+           <p>&nbsp;
+           </p>
            <table id="tt" width="400" align="center" cellpadding="0" cellspacing="0">
-       <tr>
-                 <td width="199" valign="middle"><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             <tr>
+       
+          <td width="199" valign="middle"><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Kullanıcı Adı:</p></td>
                  <td width="200" align="center"><label for="user"></label>
                    <input name="user" type="text" id="user" /></td>
@@ -127,15 +130,13 @@ if (isset($_POST['user'])) {
                <tr>
                  <td align="right"  valign="middle">Şifre:</td>
                  <td align="center"><label for="password"></label>
-                   <input type="text" name="password" id="password" /></td>
+                   <input type="password" name="password"" id="password" /></td>
                </tr>
                <tr>
-                 <td align="center" bgcolor="#00FFFF">&nbsp;</td>
+                 <td align="right" bgcolor="#00FFFF"><img src="img/ikonlar/Register.png" width="64" height="64" /></td>
                  <td align="left"><input type="submit" name="button" id="button" value="Giriş" /></td>
                </tr>
-     </table>
-             
-             
+   </table>
            </form>
            <p>&nbsp;</p>
            <p>&nbsp;</p>

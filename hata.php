@@ -4,6 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="css/main.css" rel="stylesheet" type="text/css">
 <title>Sosyal Paylasim Sitesi</title>
+<link rel="shortcut icon" href="http://localhost:81/SocialNet/img/Z.png" />
 </head>
 <body>
 <div class="headerMenu">
@@ -18,9 +19,9 @@
     </div>
      
     <div id="menu">
-      <a href="index1.php">AnaSayfa</a>
-      <a href="KayitOl2.php">Kayit Ol</a>
-      <a href="GirisSayfasi.php">Giris Yap</a>
+      <a href="index1.php"><img src="img/ikonlar/home.png" height="15" width="26" />AnaSayfa</a>&nbsp;&nbsp;
+      <a href="KayitOl2.php"><img src="img/ikonlar/address.png" height="15" width="26" />Kayit Ol</a>&nbsp;&nbsp;
+      <a href="GirisSayfasi.php"><img src="img/ikonlar/Login.png" height="15" width="26" />Giris Yap</a>&nbsp;&nbsp;
     </div>
 </div>
 </div>

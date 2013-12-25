@@ -51,7 +51,7 @@ if(isset($_POST['uploadpic'])) {
 }
 ?>
 <h3 align="right"><a href="albumleri_gor.php?u=<?php echo $kullanici_adi;
- ?>" name="geri_gitme" id="geri_gitme">Geri Git &larr;</a></h3>
+ ?>" name="geri_gitme" id="geri_gitme">Geri Git <img src="img/ikonlar/arrow_left_32.png" /></a></h3>
 <h2>RESIMLERINI YUKLE :</h2>
 <hr />
 <form action="" method="post" enctype="multipart/form-data">
