@@ -54,16 +54,24 @@ function toggle<?php echo $id; ?>() {
 	
 	if(@$_POST['setopened_' . $id . '']) {
 	$setopened_query = mysql_query("UPDATE pvt_messages SET opened='evet' WHERE id='$id'");
+	header("Location: mesajlarim.php");
 	}
+	
+	  $sorgu = mysql_query("SELECT * FROM uyeler WHERE kullanici_adi='$user_from'");
+		$get=mysql_fetch_assoc($sorgu);
+		$isim1=$get['isim'];
+		$soyisim1=$get['soyisim'];
 	
 	echo "
 	<form method='post' action='mesajlarim.php' name='$msg_title'>
-	<b><a href='profile.php?u=$user_from'>$user_from</a></b>
+	<b><a href='profile.php?u=$user_from'>$isim1 $soyisim1 </a></b>
 	<input type='button' name='openmsg' value='$msg_title' onclick='javascript:toggle$id()'>
 	<input type='submit' name='setopened_$id' value='Ben bunu okudum'>
+	<input type='image' name='setopened_$id' value='Ben bunu okudum' src='img/ikonlar/yes.gif' height='22' width='26' />
 	</form>
 <div id='toggleText$id' style='display: none;'>
-<br />$msg_body
+<h1>Gonderilme Tarih : $date</h1>
+$msg_body
 </div>
 <hr /><br />
 ";
@@ -121,20 +129,28 @@ function toggle<?php echo $id; ?>() {
 	
 	if(@$_POST['delete_' . $id . '']) {
 	$delete_msg_query = mysql_query("UPDATE pvt_messages SET deleted='evet' WHERE id='$id'");
+	header("Location: mesajlarim.php");
 	}
 	if(@$_POST['reply_' . $id . '']) {
 		header("Location: mesaj_cevapla.php?u=$user_from");
+		
 	}
+	
+	$sorgu = mysql_query("SELECT * FROM uyeler WHERE kullanici_adi='$user_from'");
+	$get=mysql_fetch_assoc($sorgu);
+	$isim1=$get['isim'];
+	$soyisim1=$get['soyisim'];
 	
 	echo "
 	<form method='post' action='mesajlarim.php' name='$msg_title'>
-	<b><a href='profile.php?u=$user_from'>$user_from</a></b>
+	<b><a href='profile.php?u=$user_from'>$isim1 $soyisim1</a></b>
 	<input type='button' name='openmsg' value='$msg_title' onclick='javascript:toggle$id()'>
 	<input type='submit' name='delete_$id' value=\"Sil\" title='Mesaji Sil'>
 	<input type='submit' name='reply_$id' value='Cevapla'>
 	</form>
 <div id='toggleText$id' style='display: none;'>
-<br />$msg_body
+<h1>Gonderilme Tarih : $date</h1>
+$msg_body
 </div>
 <hr /><br />
 	";

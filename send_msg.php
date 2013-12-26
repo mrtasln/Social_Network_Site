@@ -14,7 +14,6 @@ if(isset($_GET['u'])){
 	if(mysql_num_rows($check)===1){
 		$get=mysql_fetch_assoc($check);
 		$kullanici_adi=$get['kullanici_adi'];
-		
 		if($kullanici_adi != $kullanici) {
 			if(isset($_POST['submit'])) {
 				$msg_title = strip_tags(@$_POST['msg_title']);
@@ -44,9 +43,13 @@ if(isset($_GET['u'])){
 				echo "Senin Mesajin Gonderildi";
 				}
 			}
+			$sorgu = mysql_query("SELECT * FROM uyeler WHERE kullanici_adi='$kullanici_adi'");
+		$get=mysql_fetch_assoc($sorgu);
+		$isim1=$get['isim'];
+		$soyisim1=$get['soyisim'];
 		echo "
 		<form action='send_msg.php?u=$kullanici_adi' method='post'>
-		<h2>Mesaj Icerigi : ($kullanici_adi)</h2>
+		<h2>Mesaj Icerigi : ($isim1 $soyisim1)</h2>
 		<p /><input type='text' name='msg_title' size='30' onClick=\"value=''\" value='Mesajinin Basligini Giriniz ...'><p />
 		<textarea cols='80' rows='18' name='msg_body'>Gondermek Istedigin Mesaji Giriniz</textarea><p />
 		<input type='submit' name='submit' value='Mesaj Gonder'>
@@ -59,4 +62,5 @@ if(isset($_GET['u'])){
 		}
 	}	}
 }
+
 ?>

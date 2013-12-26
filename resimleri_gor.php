@@ -34,7 +34,7 @@ $picture1=mysql_real_escape_string($_GET['uid']);
 if($kullanici==$username1)
 {
 ?>
-<a href="resim_yukle.php?uid=<?php echo $picture; ?>"><input type="button" name="resim_yukle" id="resim_yukle" value="Resim Yukle" /></a></h3>
+<a href="resim_yukle.php?uid=<?php echo $picture; ?>"><img src="img/ikonlar/add_16.png" width="32" height="22" /><input type="button" name="resim_yukle" id="resim_yukle" value="Resim Yukle" /></a></h3>
 <?php
 }
 ?>
@@ -70,6 +70,7 @@ while($row = mysql_fetch_assoc($get_photos)) {
 	<center>
 	<form method='post' action='./resimleri_gor.php?uid=$uid'>
 	<input type='submit' name='remove_photo_$md5_image' value='Albumden Cıkar'>
+	<input type='image' src='img/ikonlar/close_16.png' height='18' width='22' name='remove_photo_$md5_image' value='Albumu Cıkar' />
 	</form>
 	</center>
 	</td>
