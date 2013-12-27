@@ -89,9 +89,8 @@ position:fixed;
 #menu{
 	background-image:url(../img/menu.png);
 	position:absolute; top:0px; right:0px;
-	height:37px;
-	padding-top:19px;
-	margin-right:4%;
+	height:32px;
+	padding-top:17px;
 }
 }
 
@@ -100,9 +99,8 @@ position:fixed;
 #menu{
 	background-image:url(../img/menu.png);
 	position:absolute; top:0px; right:0px;
-	height:37px;
-	padding-top:19px;
-	margin-right:6%;
+	height:32px;
+	padding-top:17px;
 }
 }
 
@@ -110,9 +108,8 @@ position:fixed;
 #menu{
 	background-image:url(../img/menu.png);
 	position:absolute; top:0px; right:0px;
-	height:37px;
-	padding-top:19px;
-	margin-right:10%;
+	height:32px;
+	padding-top:17px;
 }
 }
 
@@ -120,31 +117,29 @@ position:fixed;
 #menu{
 	background-image:url(../img/menu.png);
 	position:absolute; top:0px; right:0px;
-	height:37px;
-	padding-top:19px;
-	margin-right:25%;
+	height:32px;
+	padding-top:17px;
 }
 }
 #menu a{
 	color:#FFFFFF;
 	text-decoration:none;
-	font-size:14px;
+	font-size:16px;
 	background-image:url(../img/menu.png);
 	background-repeat:no-repeat;
 	padding-top:19px;
-	padding-bottom:22px;
+	padding-bottom:19px;
 	padding-left:10px;
 	padding-right:10px;
 }
-
 #menu a:hover{
 	color:#FFFFFF;
 	text-decoration:none;
-	font-size:14px;
+	font-size:16px;
 	background-image:url(../img/menu.png);
 	background-repeat:no-repeat;
-	padding-top:18px;
-	padding-bottom:22px;
+	padding-top:19px;
+	padding-bottom:20px;
 	padding-left:10px;
 	padding-right:10px;
 }
@@ -184,6 +179,15 @@ input[type="password"]:hover {
 }
 input[type="submit"] {
 	background-color: #006FC4;
+	border: 1px solid #00508D;
+	font-size: 15px;
+	color: #FFFFFF;
+	padding: 5px;
+	margin-bottom: 3px;
+	margin-top: 3px;
+	border-radius: 7px;
+}
+input[type="image"] {
 	border: 1px solid #00508D;
 	font-size: 15px;
 	color: #FFFFFF;
@@ -308,7 +312,7 @@ tr td p {
 .postForm{
 	float: right;
 	width: 85%;
-	height: 90px;
+	height: 75px;
 	background-color:#DBDBDB;
 	padding: 5px;
 }
@@ -359,7 +363,7 @@ tr td p {
 	width: 100%;
 	background-color: #AFDEAD;
 	border: 0px solid #DCE5EE;
-	font-size: 15px;
+	font-size: 24px;
 }
 .newsFeedPost {
 	width: 50%;
@@ -427,4 +431,13 @@ tr td p {
 }
 #uid {
 	background: #DAE8E9;
+}
+
+table tr #aaa {
+	padding: 1px;
+	border-style: solid;
+}
+table tr #aab {
+	padding:1px;
+	border-style: solid;
 }
